@@ -1,0 +1,51 @@
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+.env
+.env.backup
+.phpunit.result.cache
+docker-compose.override.yml
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+/.idea
+/.vscode
+
+# Numerous always-ignore extensions
+_template/*.txt
+_template/*.log
+_template/*.zip
+_template/*.rar
+_template/*.diff
+_template/*.err
+_template/*.orig
+_template/*.rej
+_template/*.swo
+_template/*.swp
+_template/*.vi
+
+# Folders to ignore
+_template/node_modules/
+_template/dist/node_modules/
+
+# OS or Editor folders
+._*
+.cache
+.DS_Store
+.idea
+.vscode
+.project
+.settings
+.tmproj
+*.esproj
+*.sublime-project
+*.sublime-workspace
+nbproject
+Thumbs.db
+
+# Komodo
+.komodotools
+*.komodoproject
