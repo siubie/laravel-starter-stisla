@@ -35,7 +35,7 @@
                 <button type="submit" class="btn btn-primary">LOGIN</button>
                 <hr>
 
-                <a href="/forgot_password">Lupa Password ?</a>
+                <a href="/forgot-password">Lupa Password ?</a>
 
             </form>
         </div>
