@@ -11,10 +11,10 @@
             </div>
             @endif
 
-            <form method="POST" >
+            <form method="POST" action="{{ route('password.update') }}">
                 @csrf
 
-               <!-- <input type="hidden" name="token" > -->
+                <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
                 <div class="form-group">
                     <label class="font-weight-bold text-uppercase">Email Address</label>
