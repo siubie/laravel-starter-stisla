@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('layout/login');
+    return view('auth/login');
 });
-Route::get('/login', function () {
-    return view('layout/login');
+Route::post('/login', function () {
+    return view('auth/login');
 });
 Route::get('/forgot_password', function () {
-    return view('layout/forgot_password');
+    return view('auth/forgot_password');
 });
