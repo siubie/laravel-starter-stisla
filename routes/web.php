@@ -19,6 +19,6 @@ Route::get('/', function () {
 Route::post('/login', function () {
     return view('auth/login');
 });
-Route::get('/forgot_password', function () {
-    return view('auth/forgot_password');
+Route::get('/forgot-password', function () {
+    return view('auth/forgot-password');
 });
