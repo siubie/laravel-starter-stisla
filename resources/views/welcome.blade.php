@@ -26,10 +26,11 @@
             <img src="../assets/img/stisla-fill.svg" alt="logo" width="80" class="shadow-light rounded-circle mb-5 mt-2">
             <h4 class="text-dark font-weight-normal">Welcome to <span class="font-weight-bold">Stisla</span></h4>
             <p class="text-muted">Before you get started, you must login or register if you don't already have an account.</p>
-            <form method="POST" action="#" class="needs-validation" novalidate="">
+            <form action="{{ route('login') }}" method="POST">
+              @csrf
               <div class="form-group">
                 <label for="email">Email</label>
-                <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
+                <input  type="email" name="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror" placeholder="Masukkan Alamat Email" tabindex="1" required autofocus>
                 <div class="invalid-feedback">
                   Please fill in your email
                 </div>
@@ -39,7 +40,7 @@
                 <div class="d-block">
                   <label for="password" class="control-label">Password</label>
                 </div>
-                <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
+                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan Password" tabindex="2" required>
                 <div class="invalid-feedback">
                   please fill in your password
                 </div>
@@ -53,7 +54,7 @@
               </div>
 
               <div class="form-group text-right">
-                <a href="auth-forgot-password.html" class="float-left mt-3">
+                <a href="/forgot-password" class="float-left mt-3">
                   Forgot Password?
                 </a>
                 <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right" tabindex="4">
@@ -62,7 +63,7 @@
               </div>
 
               <div class="mt-5 text-center">
-                Don't have an account? <a href="auth-register.html">Create new one</a>
+                Don't have an account? <a href="/register">Create new one</a>
               </div>
             </form>
 
