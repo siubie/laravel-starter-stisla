@@ -19,6 +19,20 @@ Route::get('/', function () {
 Route::post('/login', function () {
     return view('auth/login');
 });
+<<<<<<< HEAD
 Route::get('/forgot-password', function () {
     return view('auth/forgot-password');
+=======
+Route::get('/forgot_password', function () {
+    return view('auth/forgot_password');
+});
+Route::post('/reset-password', function () {
+    return view('auth/reset-password');
+});
+Route::get('/reset-password', function () {
+    return view('auth/reset-password');
+});
+Route::post('/password.update', function () {
+    return view('auth/login');
+>>>>>>> 21a03d9df91f3b8bddac51906bc1ff07a94a32c3
 });
