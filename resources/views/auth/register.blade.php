@@ -33,7 +33,7 @@
                                 <h4>Register</h4>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('register') }}" method="POST">
+                                <form action="{{ route('register') }}" method="POST" >
                                     @csrf
                                     <div class="row">
                                         <div class="form-group col-6">
@@ -41,46 +41,45 @@
                                                 <label for="first_name">Full Name</label>
                                                 <input id="first_name" type="text" name="name" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror" placeholder="Masukkan Nama Lengkap" autofocus>
                                                 @error('name')
-                                                <div class="alert alert-danger mt-2">
-                                                    {{ $message }}
-                                                </div>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="email">Email</label>
-                                                <input id="email" type="email" name="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror" placeholder="Masukkan Alamat Email">
-                                                @error('email')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
-                                                @enderror
                                             </div>
+                                            @enderror
                                         </div>
+                                    </div>
 
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="password" class="d-block">Password</label>
-                                                <input id="password" type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan Password" data-indicator="pwindicator">
-                                                @error('password')
-                                                <div class="alert alert-danger mt-2">
-                                                    {{ $message }}
-                                                </div>
-                                                @enderror
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror" placeholder="Masukkan Alamat Email">
+                                            @error('email')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
                                             </div>
+                                            @enderror
                                         </div>
+                                    </div>
 
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="password2" class="d-block">Password Confirmation</label>
-                                                <input id="password2" type="password" name="password_confirmation" class="form-control" placeholder="Masukkan Konfirmasi Password">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="password" class="d-block">Password</label>
+                                            <input id="password" type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan Password" data-indicator="pwindicator">
+                                            @error('password')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
                                             </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="password2" class="d-block">Password Confirmation</label>
+                                            <input id="password2" name="password_confirmation" class="form-control" placeholder="Masukkan Konfirmasi Password">
                                         </div>
                                     </div>
                             </div>
-
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn-lg btn-block">
                                     Register
@@ -88,16 +87,14 @@
                             </div>
                             </form>
                         </div>
-                        <div class="login mt-3 text-center">
-                            <p>Sudah punya akun ? Login <a href="/login">Disini</a></p>
-                        </div>
-                        <div class="simple-footer">
-                            Copyright &copy; Stisla 2018
-                        </div>
+                    </div>
+                    <div class="simple-footer">
+                        Copyright &copy; Stisla 2018
                     </div>
                 </div>
             </div>
-        </section>
+    </div>
+    </section>
     </div>
 
     <!-- General JS Scripts -->
