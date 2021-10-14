@@ -27,23 +27,20 @@
             <div class="login-brand">
               <img src="../assets/img/stisla-fill.svg" alt="logo" width="100" class="shadow-light rounded-circle">
             </div>
-
             <div class="card card-primary">
               <div class="card-header">
                 <h4>Login</h4>
               </div>
-
               <div class="card-body">
                 <form action="{{ route('login') }}" method="POST" class="needs-validation" novalidate="">
                   @csrf
                   <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" name="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror" placeholder="Masukkan Alamat Email" tabindex="1" required autofocus>
-                    <div class="invalid-feedback">
-                      Please fill in your email
-                    </div>
+                    <input type="email" name="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror" placeholder="Masukkan Alamat Email">
+                    @error('email')
+                    <div class="invalid-feedback">{{ $message}}</div>
+                    @enderror
                   </div>
-
                   <div class="form-group">
                     <div class="d-block">
                       <label for="password" class="control-label">Password</label>
@@ -53,10 +50,11 @@
                         </a>
                       </div>
                     </div>
-                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan Password" tabindex="2" required>
-                    <div class="invalid-feedback">
-                      please fill in your password
-                    </div>
+                    <!-- <label class="font-weight-bold text-uppercase">Password</label> -->
+                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan Password">
+                    @error('email')
+                    <div class="invalid-feedback">{{ $message}}</div>
+                    @enderror
                   </div>
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
