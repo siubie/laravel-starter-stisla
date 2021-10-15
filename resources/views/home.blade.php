@@ -308,7 +308,7 @@
                                 <li><a class="nav-link beep beep-sidebar" href="components-pricing.html">Pricing</a></li>
                                 <li><a class="nav-link" href="components-statistic.html">Statistic</a></li>
                                 <li><a class="nav-link" href="components-tab.html">Tab</a></li>
-                                <li><a class="nav-link" href="components-table.html">Table</a></li>
+                                <li><a class="nav-link" href="/table-user">Table</a></li>
                                 <li><a class="nav-link" href="components-user.html">User</a></li>
                                 <li><a class="nav-link beep beep-sidebar" href="components-wizard.html">Wizard</a></li>
                             </ul>
