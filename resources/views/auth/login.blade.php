@@ -32,6 +32,11 @@
                 <h4>Login</h4>
               </div>
               <div class="card-body">
+                @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                  {{ session('status') }}
+                </div>
+                @endif
                 <form action="{{ route('login') }}" method="POST" class="needs-validation" novalidate="">
                   @csrf
                   <div class="form-group">
