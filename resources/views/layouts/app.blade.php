@@ -448,35 +448,38 @@
         type: "POST",
         url: "{{ url('edit-user') }}",
         data: {
+          "_token": "{{ csrf_token() }}",
           id: id
         },
         dataType: 'json',
         success: function(res) {
           $('#UserEdit').html("Edit User");
           $('#user-edit').modal('show');
-          $('#id').val(res.id);
-          $('#name').val(res.name);
-          $('#address').val(res.address);
-          $('#email').val(res.email);
+          $('#idtext').val(res.id);
+          $('#nametext').val(res.name);
+          $('#passwordtext').val(res.password);
+          $('#emailtext').val(res.email);
         }
       });
     }
 
     // delete
-    function deleteFunc(id) {
+    function deleteFunc(idkey) {
       if (confirm("Delete Record?") == true) {
-        var id = id;
+        var id = idkey;
         // ajax
         $.ajax({
           type: "POST",
           url: "{{ url('delete-user') }}",
           data: {
+            "_token": "{{ csrf_token() }}",
             id: id
           },
           dataType: 'json',
           success: function(res) {
             var oTable = $('#myTable').dataTable();
             oTable.fnDraw(false);
+            location.reload();
           }
         });
       }
@@ -505,6 +508,31 @@
         }
       });
     });
+
+    $('#UserFormEdit').submit(function(e) {
+      e.preventDefault();
+      var formData = new FormData(this);
+      $.ajax({
+        type: 'POST',
+        url: "{{ url('store-user')}}",
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: (data) => {
+          $("#user-modal").modal('hide');
+          var oTable = $('#myTable').dataTable();
+          oTable.fnDraw(false);
+          $("#btn-save").html('submit');
+          $("#btn-save").attr("disabled", false);
+          location.reload();
+        },
+        error: function(data) {
+          console.log(data);
+        }
+      });
+    });
+    
   </script>
 
   <!-- Page Specific JS File -->

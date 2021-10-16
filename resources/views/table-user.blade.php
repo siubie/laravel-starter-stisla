@@ -18,7 +18,7 @@
             <div class="col-lg-12 margin-tb">
 
               <div class="pull-right mb-2">
-                <a class="btn btn-success" onClick="add()" href="javascript:void(0)"> Create New Usery</a>
+                <a class="btn btn-success" onClick="add()" href="javascript:void(0)"> Create New User</a>
               </div>
             </div>
           </div>
@@ -45,15 +45,15 @@
                     <tbody>
                       @foreach($users as $user)
                       <tr>
-                        <td>{{ $user->id}}</td>
+                        <td>{{ $loop->iteration}}</td>
                         <td>{{ $user->name}}</td>
                         <td>{{ $user->email}}</td>
                         <td>
                           <div class="badge badge-success">Active</div>
                         </td>
                         <td>
-                          <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit" href="javascript:void(0)" onclick="editFunc('{{ $user->id }}')"><i class="fas fa-pencil-alt"></i></a>
-                          <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-><i class="fas fa-trash"></i></a>
+                          <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit" href="javascript:void(0)" onClick="editFunc('{{ $user->id }}')"><i class="fas fa-pencil-alt"></i></a>
+                          <a class="btn btn-danger btn-action" id="getDeleteId" data-toggle="tooltip" title="Delete" onClick="deleteFunc('{{ $user->id }}')"><i class="fas fa-trash"></i></a>
                         </td>
                       </tr>
                       @endforeach
@@ -120,27 +120,23 @@
         <button type="button" class="close modelClose" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <form action="javascript:void(0)" id="UserForm" name="UserForm" class="form-horizontal" method="GET" enctype="multipart/form-data">
+        <form action="javascript:void(0)" id="UserFormEdit" name="UserForm" class="form-horizontal" method="POST" enctype="multipart/form-data">
           @csrf
-          <input type="hidden" name="id" id="id">
+          <input type="hidden" name="id" id="idtext">
           <div class="form-group">
             <label for="name" class="col-sm-2 control-label">User Name</label>
             <div class="col-sm-12">
-              <input type="text" class="form-control" id="name" name="name" placeholder="Enter User Name" maxlength="50" required="">
+              <input type="text" class="form-control" id="nametext" name="name" placeholder="Enter User Name" maxlength="50" required="">
             </div>
           </div>
           <div class="form-group">
             <label for="name" class="col-sm-2 control-label">User Email</label>
             <div class="col-sm-12">
-              <input type="email" class="form-control" id="email" name="email" placeholder="Enter User Email" maxlength="50" required="">
+              <input type="email" class="form-control" id="emailtext" name="email" placeholder="Enter User Email" maxlength="50" required="">
+              <input type="hidden" class="form-control" id="passwordtext" name="password" placeholder="Enter User Email" maxlength="50" required="">
             </div>
           </div>
-          <div class="form-group">
-            <label class="col-sm-2 control-label">User Password</label>
-            <div class="col-sm-12">
-              <input type="text" class="form-control" id="password" name="password" placeholder="Enter Password" required="">
-            </div>
-          </div>
+
           <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-primary" id="btn-save">Save changes
             </button>
@@ -154,24 +150,24 @@
 </div>
 
 <!-- Delete User -->
-<div class="modal" id="DeleteArticleModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">User Delete</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-                <h4>Are you sure want to delete this User?</h4>
-            </div>
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="SubmitDeleteArticleForm">Yes</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-            </div>
-        </div>
+<div class="modal" id="DeleteUserModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">User Delete</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <h4>Are you sure want to delete this User?</h4>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" id="SubmitDeleteUserForm">Yes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+      </div>
     </div>
+  </div>
 </div>
 @endsection
