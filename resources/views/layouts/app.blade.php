@@ -433,6 +433,78 @@
     $(document).ready(function() {
       $('#myTable').DataTable();
     });
+
+    // add user
+    function add() {
+      $('#UserForm').trigger("reset");
+      $('#UserModal').html("Add User");
+      $('#user-modal').modal('show');
+      $('#id').val('');
+    }
+
+    // edit
+    function editFunc(id) {
+      $.ajax({
+        type: "POST",
+        url: "{{ url('edit-user') }}",
+        data: {
+          id: id
+        },
+        dataType: 'json',
+        success: function(res) {
+          $('#UserEdit').html("Edit User");
+          $('#user-edit').modal('show');
+          $('#id').val(res.id);
+          $('#name').val(res.name);
+          $('#address').val(res.address);
+          $('#email').val(res.email);
+        }
+      });
+    }
+
+    // delete
+    function deleteFunc(id) {
+      if (confirm("Delete Record?") == true) {
+        var id = id;
+        // ajax
+        $.ajax({
+          type: "POST",
+          url: "{{ url('delete-user') }}",
+          data: {
+            id: id
+          },
+          dataType: 'json',
+          success: function(res) {
+            var oTable = $('#myTable').dataTable();
+            oTable.fnDraw(false);
+          }
+        });
+      }
+    }
+
+    $('#UserForm').submit(function(e) {
+      e.preventDefault();
+      var formData = new FormData(this);
+      $.ajax({
+        type: 'POST',
+        url: "{{ url('store-user')}}",
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: (data) => {
+          $("#user-modal").modal('hide');
+          var oTable = $('#myTable').dataTable();
+          oTable.fnDraw(false);
+          $("#btn-save").html('submit');
+          $("#btn-save").attr("disabled", false);
+          location.reload();
+        },
+        error: function(data) {
+          console.log(data);
+        }
+      });
+    });
   </script>
 
   <!-- Page Specific JS File -->

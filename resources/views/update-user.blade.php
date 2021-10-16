@@ -16,7 +16,8 @@
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-6">
                     <div class="card">
-                        <form class="needs-validation" novalidate="" method="POST">
+                        <form action="javascript:void(0)" id="editFunc({$id})" name="UserForm" class="form-horizontal" method="POST" enctype="multipart/form-data">
+                            @csrf
                             <div class="card-header">
                                 <h4>User</h4>
                             </div>
@@ -54,7 +55,7 @@
                                 </div>
                             </div>
                             <div class="card-footer text-right">
-                                <button class="btn btn-primary">Save</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
                             </div>
                         </form>
                     </div>
