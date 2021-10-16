@@ -24,5 +24,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/table-user', function () {
         return view('table-user',['users' => User::get(),]);
     });
+    Route::get('/update-user/{id}', function () {
+        return view('update-user',['users' => User::get(),]);
+    });
 
 });
