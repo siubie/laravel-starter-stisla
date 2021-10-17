@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,13 +20,16 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', function () {
-        return view('home',['users' => User::get(),]);
+        return view('home', ['users' => User::get(),]);
     });
     Route::get('/table-user', function () {
-        return view('table-user',['users' => User::get(),]);
+        return view('table-user', ['users' => User::get(),]);
     });
     Route::get('/update-user/{id}', function () {
-        return view('update-user',['users' => User::get(),]);
+        return view('update-user', ['users' => User::get(),]);
     });
-
+    // Route::get('myTable', [UserController::class, 'index']);
+    Route::post('store-user', [UserController::class, 'store']);
+    Route::post('edit-user', [UserController::class, 'edit']);
+    Route::post('delete-user', [UserController::class, 'destroy']);
 });
