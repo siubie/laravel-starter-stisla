@@ -12,13 +12,6 @@ class UserController extends Controller
     //
     public function index()
     {
-        if (request()->ajax()) {
-            return datatables()->of(User::select('*'))
-                ->addColumn('action', 'user-action')
-                ->rawColumns(['action'])
-                ->addIndexColumn()
-                ->make(true);
-        }
         return view('table-user');
     }
 
