@@ -18,7 +18,7 @@
             <div class="col-lg-12 margin-tb">
 
               <div class="pull-right mb-2">
-                <a class="btn btn-success" onClick="add()" href="javascript:void(0)"> Create New User</a>
+                <a class="btn btn-success"  href="user/create"> Create New User</a>
               </div>
             </div>
           </div>

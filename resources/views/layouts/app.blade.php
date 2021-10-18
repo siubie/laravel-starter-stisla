@@ -177,14 +177,6 @@
       $('#myTable').DataTable();
     });
 
-    // add user
-    function add() {
-      $('#UserForm').trigger("reset");
-      $('#UserModal').html("Add User");
-      $('#user-modal').modal('show');
-      $('#id').val('');
-    }
-
     // edit
     function editFunc(id) {
       $.ajax({
