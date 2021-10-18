@@ -28,6 +28,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/update-user/{id}', function () {
         return view('update-user', ['users' => User::get(),]);
     });
+    // Route::get('/create-user', function () {
+    //     return view('create-user', ['users' => User::get(),]);
+    // });
+    Route::get('/user/create', [UserController::class, 'create']);
+    Route::post('/user', [UserController::class, 'store']);
     // Route::get('myTable', [UserController::class, 'index']);
     Route::post('store-user', [UserController::class, 'store']);
     Route::post('edit-user', [UserController::class, 'edit']);

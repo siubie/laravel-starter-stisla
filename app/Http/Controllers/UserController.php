@@ -29,23 +29,18 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function create()
+    {
+        return view('create-user');
+    }
     public function store(Request $request)
     {
-
-        $id = $request->id;
-
-        $user   =   User::updateOrCreate(
-            [
-                'id' => $id
-            ],
-            [
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => $request->password
-            ]
-        );
-
-        return Response()->json($user);
+        User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => $request->password
+        ]);
+        return redirect('table-user')->with('Success', 'User added successfully');
     }
 
     public function edit(Request $request)
