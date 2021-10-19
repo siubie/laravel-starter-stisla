@@ -19,7 +19,9 @@ class UserController extends Controller
     public function index()
     {
         //index -> menampilkan tabel data
-        return view('table-user', ['users' => User::get(),]);
+        $users = User::all();
+        return view('table-user')
+            ->with('users', $users);
     }
 
     /**
@@ -70,6 +72,12 @@ class UserController extends Controller
     public function edit($id)
     {
         //menampilkan form edit data user
+        // $users = User::find($id);
+        // return view('edit-user', compact('users', 'users'));
+        $user = User::find($id);
+
+        return view('edit-user')
+            ->with('user', $user);
     }
 
     /**
@@ -82,6 +90,19 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //mengupdate data user ke database
+
+        $users = User::findOrFail($id);
+        $this->validate($request, [
+            'name' => 'required',        
+            'email' => 'required|email',
+        ]);
+
+        $input = $request->all();
+        $users->fill($input)->save();
+        return redirect()->route('user.index');
+
+        // $users = User::find($id)->update($request->all());
+        // return back()->with('Success', ' User Edited Successfully!');
     }
 
     /**
@@ -94,12 +115,6 @@ class UserController extends Controller
     {
         //delete data
     }
-
-    // //
-    // public function index()
-    // {
-    //     return view('table-user');
-    // }
 
 
     // /**
