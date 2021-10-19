@@ -138,7 +138,13 @@
 
             <li class="menu-header">Starter</li>
             <li class="active"><a class="nav-link" href="/home"><i class="far fa-square"></i> <span>Blank Page</span></a></li>
-            <li class="active"><a class="nav-link" href="/table-user"><i class="fas fa-th-large"></i> <span>Table</span></a></li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i> <span>Table</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link " href="{{route('user.index')}}">Table User</a></li> 
+              </ul>
+            </li>
+            
 
           </ul>
 
@@ -167,6 +173,8 @@
   <script src="../assets/js/stisla.js"></script>
 
   <!-- JS Libraies -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="../assets/js/page/modules-sweetalert.js"></script>
 
   <!-- Template JS File -->
   <script src="../assets/js/scripts.js"></script>
@@ -199,27 +207,30 @@
     }
 
     // delete
-    function deleteFunc(idkey) {
-      if (confirm("Delete Record?") == true) {
-        var id = idkey;
-        // ajax
-        $.ajax({
-          type: "POST",
-          url: "{{ url('delete-user') }}",
-          data: {
-            "_token": "{{ csrf_token() }}",
-            id: id
-          },
-          dataType: 'json',
-          success: function(res) {
-            var oTable = $('#myTable').dataTable();
-            oTable.fnDraw(false);
-            location.reload();
+    $(document).on("click", ".swal-6", function(e) {
+      e.preventDefault();
+      let id = $(this).data('id');
+      console.log(id);
+      swal({
+          title: 'Are you sure?',
+          text: 'Once deleted, you will not be able to recover this imaginary file!',
+          icon: 'warning',
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            // $('#delete-user').submit()
+            swal('Poof! Your imaginary file has been deleted!', {
+              icon: 'success',
+            });
+          } else {
+            swal('Your imaginary file is safe!');
           }
         });
-      }
-    }
+    });
 
+    // ---------------------------------------------------------------
     $('#UserForm').submit(function(e) {
       e.preventDefault();
       var formData = new FormData(this);
