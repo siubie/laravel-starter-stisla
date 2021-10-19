@@ -42,12 +42,13 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         //simpan data
+        // User::create($request->validated());
         User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
         ]);
-        return redirect('user')->with('Success', 'User added successfully');
+        return redirect(route('user.index'));
     }
 
     /**
@@ -94,46 +95,4 @@ class UserController extends Controller
     {
         //delete data
     }
-
-    // //
-    // public function index()
-    // {
-    //     return view('table-user');
-    // }
-
-
-    // /**
-    //  * Store a newly created resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function create()
-    // {
-    //     return view('create-user');
-    // }
-    // public function store(Request $request)
-    // {
-    //     User::create([
-    //     'name' => $request->name,
-    //     'email' => $request->email,
-    //     'password' => $request->password
-    //     ]);
-    //     return redirect('table-user')->with('Success', 'User added successfully');
-    // }
-
-    // public function edit(Request $request)
-    // {
-    //     $where = array('id' => $request->id);
-    //     $user  = User::where($where)->first();
-
-    //     return Response()->json($user);
-    // }
-
-    // public function destroy(Request $request)
-    // {
-    //     $user = User::where('id', $request->id)->delete();
-
-    //     return Response()->json($user);
-    // }
 }
