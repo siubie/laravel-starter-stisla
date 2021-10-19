@@ -44,12 +44,13 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         //simpan data
+        // User::create($request->validated());
         User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
         ]);
-        return redirect('user')->with('Success', 'User added successfully');
+        return redirect(route('user.index'));
     }
 
     /**
