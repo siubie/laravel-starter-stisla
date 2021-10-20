@@ -57,7 +57,11 @@
                                             </td>
                                             <td>
                                                 <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit" href="javascript:void(0)" onClick="editFunc('{{ $user->id }}')"><i class="fas fa-pencil-alt"></i></a>
-                                                <a class="btn btn-danger btn-action" id="getDeleteId" data-toggle="tooltip" title="Delete" onClick="deleteFunc('{{ $user->id }}')"><i class="fas fa-trash"></i></a>
+                                                <form class="delete-user" action="{{route('user.destroy',$user)}}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <a class=" btn btn-danger btn-action swal-6"  data-toggle="tooltip" data-id="{{ $user->id }}" title="Delete" onClick="return false"><i class="fas fa-trash"></i></a>
+                                                    </form>
                                             </td>
                                         </tr>
                                         @endforeach
