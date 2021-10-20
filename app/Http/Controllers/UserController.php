@@ -19,7 +19,12 @@ class UserController extends Controller
     public function index()
     {
         //index -> menampilkan tabel data
-        return view('table-user', ['users' => User::get(),]);
+        // mengambil data
+        $user = User::all();
+
+        // menampilkan data
+        return view('table-user')
+            ->with('users', $user);
     }
 
     /**
