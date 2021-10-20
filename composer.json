@@ -12,6 +12,7 @@
         "laravel/framework": "^8.54",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+        "maatwebsite/excel": "^3.1",
         "wulfheart/pretty_routes": "^0.3.0",
         "yajra/laravel-datatables-oracle": "~9.0"
     },
