@@ -1,3 +1,6 @@
+editUser
+
+
 @extends('layouts.app')
 <!-- {{ URL::asset('css/style.css'); }} -->
 
@@ -46,3 +49,9 @@
     </section>
 </div>
 @endsection
+
+
+
+
+
+y

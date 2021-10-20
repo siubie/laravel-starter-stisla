@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
 use DataTables;
 use Validator;
@@ -76,7 +77,6 @@ class UserController extends Controller
         // $users = User::find($id);
         // return view('edit-user', compact('users', 'users'));
         $user = User::find($id);
-
         return view('edit-user')
             ->with('user', $user);
     }
@@ -88,16 +88,19 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
         //mengupdate data user ke database
 
-        $users = User::findOrFail($id);
-        $this->validate($request, [
-            'name' => 'required',        
-            'email' => 'required|email',
-        ]);
-
+        $users = User::find($id);
+        // [
+        //     'name' => $request['name'],
+        //     'email' => $request['email'],
+        // ];
+        // $this->validate($request, [
+        //     'name' => 'required',        
+        //     'email' => 'required|email',
+        // ]);
         $input = $request->all();
         $users->fill($input)->save();
         return redirect()->route('user.index');
