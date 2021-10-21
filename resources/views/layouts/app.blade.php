@@ -137,9 +137,15 @@
           <ul class="sidebar-menu">
 
             <li class="menu-header">Starter</li>
-            <li class="active"><a class="nav-link" href="/home"><i class="far fa-square"></i> <span>Blank Page</span></a></li>
-            <li class="active"><a class="nav-link" href="{{route('user.index')}}"><i class="fas fa-th-large"></i> <span>Table</span></a></li>
-
+            <li class="active">
+              <a class="nav-link" href="/home"><i class="far fa-square"></i> <span>Blank Page</span></a>
+            </li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i> <span>Table</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link " href="{{route('user.index')}}">Table User</a></li>
+              </ul>
+            </li>
           </ul>
 
         </aside>
@@ -200,8 +206,8 @@
       });
     }
 
-     // delete
-     $(document).on("click", ".swal-6", function(e) {
+    // delete
+    $(document).on("click", ".swal-6", function(e) {
       e.preventDefault();
       let id = $(this).data('user');
       console.log(id);
@@ -214,7 +220,7 @@
         })
         .then((willDelete) => {
           if (willDelete) {
-            $('#delete-user').submit()
+            $(this).closest("form").submit()
             swal('Poof! Your imaginary file has been deleted!', {
               icon: 'success',
             });
@@ -223,7 +229,6 @@
           }
         });
     });
-
 
     // ---------------------------------------------------------------
     $('#UserForm').submit(function(e) {
