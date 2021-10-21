@@ -13,8 +13,8 @@
 
   <!-- CSS Libraries -->
   <!-- Template CSS -->
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
 </head>
 
 <body>
@@ -52,19 +52,19 @@
               </div>
               <div class="search-item">
                 <a href="#">
-                  <img class="mr-3 rounded" width="30" src="../assets/img/products/product-3-50.png" alt="product">
+                  <img class="mr-3 rounded" width="30" src="/assets/img/products/product-3-50.png" alt="product">
                   oPhone S9 Limited Edition
                 </a>
               </div>
               <div class="search-item">
                 <a href="#">
-                  <img class="mr-3 rounded" width="30" src="../assets/img/products/product-2-50.png" alt="product">
+                  <img class="mr-3 rounded" width="30" src="/assets/img/products/product-2-50.png" alt="product">
                   Drone X2 New Gen-7
                 </a>
               </div>
               <div class="search-item">
                 <a href="#">
-                  <img class="mr-3 rounded" width="30" src="../assets/img/products/product-1-50.png" alt="product">
+                  <img class="mr-3 rounded" width="30" src="/assets/img/products/product-1-50.png" alt="product">
                   Headphone Blitz
                 </a>
               </div>
@@ -101,7 +101,7 @@
           </li>
 
           <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-              <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+              <img alt="image" src="/assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
               <div class="d-sm-none d-lg-inline-block">Hi, {{ auth()->user()->name }}</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
@@ -137,15 +137,15 @@
           <ul class="sidebar-menu">
 
             <li class="menu-header">Starter</li>
-            <li class="active"><a class="nav-link" href="/home"><i class="far fa-square"></i> <span>Blank Page</span></a></li>
+            <li class="active">
+              <a class="nav-link" href="/home"><i class="far fa-square"></i> <span>Blank Page</span></a>
+            </li>
             <li class="nav-item dropdown">
               <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i> <span>Table</span></a>
               <ul class="dropdown-menu">
-                <li><a class="nav-link " href="{{route('user.index')}}">Table User</a></li> 
+                <li><a class="nav-link " href="{{route('user.index')}}">Table User</a></li>
               </ul>
             </li>
-            
-
           </ul>
 
         </aside>
@@ -170,58 +170,35 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-  <script src="../assets/js/stisla.js"></script>
+  <script src="/assets/js/stisla.js"></script>
 
   <!-- JS Libraies -->
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <script src="../assets/js/page/modules-sweetalert.js"></script>
+  <script src="/assets/js/page/modules-sweetalert.js"></script>
 
   <!-- Template JS File -->
-  <script src="../assets/js/scripts.js"></script>
-  <script src="../assets/js/custom.js"></script>
+  <script src="/assets/js/scripts.js"></script>
+  <script src="/assets/js/custom.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.3/datatables.min.js"></script>
   <script>
-    $(document).ready(function() {
-      $('#myTable').DataTable();
-    });
-
-    // edit
-    function editFunc(id) {
-      $.ajax({
-        type: "POST",
-        url: "{{ url('edit-user') }}",
-        data: {
-          "_token": "{{ csrf_token() }}",
-          id: id
-        },
-        dataType: 'json',
-        success: function(res) {
-          $('#UserEdit').html("Edit User");
-          $('#user-edit').modal('show');
-          $('#idtext').val(res.id);
-          $('#nametext').val(res.name);
-          $('#passwordtext').val(res.password);
-          $('#emailtext').val(res.email);
-        }
-      });
-    }
+    
 
     // delete
     $(document).on("click", ".swal-6", function(e) {
       e.preventDefault();
-      let id = $(this).data('id');
+      let id = $(this).data('user');
       console.log(id);
       swal({
           title: 'Are you sure?',
-          text: 'Once deleted, you will not be able to recover this imaginary file!',
+          text: 'Once deleted, you will not be able to recover this user!',
           icon: 'warning',
           buttons: true,
           dangerMode: true,
         })
         .then((willDelete) => {
           if (willDelete) {
-            // $('#delete-user').submit()
-            swal('Poof! Your imaginary file has been deleted!', {
+            $(this).closest("form").submit()
+            swal('Poof! User has been deleted!', {
               icon: 'success',
             });
           } else {
@@ -230,54 +207,7 @@
         });
     });
 
-    // ---------------------------------------------------------------
-    $('#UserForm').submit(function(e) {
-      e.preventDefault();
-      var formData = new FormData(this);
-      $.ajax({
-        type: 'POST',
-        url: "{{ url('store-user')}}",
-        data: formData,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: (data) => {
-          $("#user-modal").modal('hide');
-          var oTable = $('#myTable').dataTable();
-          oTable.fnDraw(false);
-          $("#btn-save").html('submit');
-          $("#btn-save").attr("disabled", false);
-          location.reload();
-        },
-        error: function(data) {
-          console.log(data);
-        }
-      });
-    });
-
-    $('#UserFormEdit').submit(function(e) {
-      e.preventDefault();
-      var formData = new FormData(this);
-      $.ajax({
-        type: 'POST',
-        url: "{{ url('store-user')}}",
-        data: formData,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: (data) => {
-          $("#user-modal").modal('hide');
-          var oTable = $('#myTable').dataTable();
-          oTable.fnDraw(false);
-          $("#btn-save").html('submit');
-          $("#btn-save").attr("disabled", false);
-          location.reload();
-        },
-        error: function(data) {
-          console.log(data);
-        }
-      });
-    });
+   
   </script>
 
   <!-- Page Specific JS File -->
