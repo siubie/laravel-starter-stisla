@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
-use Illuminate\Http\Request;
-use DataTables;
-use Validator;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -47,7 +45,6 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         //simpan data
-        // User::create($request->validated());
         User::create([
             'name' => $request['name'],
             'email' => $request['email'],
@@ -62,7 +59,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
         //nampilkan detail satu user
     }
@@ -73,9 +70,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //menampilkan form edit data user
+        return view('edit-user')
+            ->with('user', $user);
     }
 
     /**
@@ -85,9 +83,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
         //mengupdate data user ke database
+        $validate = $request->validated();
+
+        $user->update($validate);
+        return redirect()->route('user.index');
     }
 
     /**
@@ -96,8 +98,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
         //delete data
+        $user->delete();
+        session()->flash('status', 'User was deleted!');
+        return redirect()->route('user.index');
     }
 }
