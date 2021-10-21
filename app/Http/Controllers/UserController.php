@@ -48,7 +48,6 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         //simpan data
-        // User::create($request->validated());
         User::create([
             'name' => $request['name'],
             'email' => $request['email'],
@@ -63,7 +62,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
         //nampilkan detail satu user
     }
@@ -74,9 +73,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::find($id);
         return view('edit-user')
             ->with('user', $user);
     }
@@ -88,18 +86,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUserRequest $request, $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
         //mengupdate data user ke database
         $validate = $request->validated();
-        $users = User::findOrFail($id);
 
-        $users->update(array_merge(
-            $validate,
-        ));
-        // $users = User::find($id);
-        // $input = $request->all();
-        // $users->fill($input)->save();
+        $user->update($validate);
         return redirect()->route('user.index');
     }
 
@@ -113,7 +105,7 @@ class UserController extends Controller
     {
         //delete data
         $user->delete();
-        session()->flash('status', 'Task was successful!');
+        session()->flash('status', 'User was deleted!');
         return redirect()->route('user.index');
     }
 

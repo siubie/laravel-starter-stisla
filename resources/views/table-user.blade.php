@@ -56,7 +56,7 @@
                                                 <div class="badge badge-success">Active</div>
                                             </td>
                                             <td class="d-flex align-items-center">
-                                                <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit" href="{{route ('user.edit', $user->id)}}"><i class="fas fa-pencil-alt"></i></a>
+                                                <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit" href="{{route ('user.edit', $user)}}"><i class="fas fa-pencil-alt"></i></a>
                                                 <form class="delete-user ml-2" action="{{route('user.destroy',$user)}}" method="POST" >
                                                     @csrf
                                                     @method('DELETE')

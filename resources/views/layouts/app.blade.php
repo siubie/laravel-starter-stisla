@@ -181,30 +181,7 @@
   <script src="/assets/js/custom.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.3/datatables.min.js"></script>
   <script>
-    $(document).ready(function() {
-      $('#myTable').DataTable();
-    });
-
-    // edit
-    function editFunc(id) {
-      $.ajax({
-        type: "POST",
-        url: "{{ url('edit-user') }}",
-        data: {
-          "_token": "{{ csrf_token() }}",
-          id: id
-        },
-        dataType: 'json',
-        success: function(res) {
-          $('#UserEdit').html("Edit User");
-          $('#user-edit').modal('show');
-          $('#idtext').val(res.id);
-          $('#nametext').val(res.name);
-          $('#passwordtext').val(res.password);
-          $('#emailtext').val(res.email);
-        }
-      });
-    }
+    
 
     // delete
     $(document).on("click", ".swal-6", function(e) {
@@ -213,7 +190,7 @@
       console.log(id);
       swal({
           title: 'Are you sure?',
-          text: 'Once deleted, you will not be able to recover this imaginary file!',
+          text: 'Once deleted, you will not be able to recover this user!',
           icon: 'warning',
           buttons: true,
           dangerMode: true,
@@ -221,7 +198,7 @@
         .then((willDelete) => {
           if (willDelete) {
             $(this).closest("form").submit()
-            swal('Poof! Your imaginary file has been deleted!', {
+            swal('Poof! User has been deleted!', {
               icon: 'success',
             });
           } else {
@@ -230,54 +207,7 @@
         });
     });
 
-    // ---------------------------------------------------------------
-    $('#UserForm').submit(function(e) {
-      e.preventDefault();
-      var formData = new FormData(this);
-      $.ajax({
-        type: 'POST',
-        url: "{{ url('store-user')}}",
-        data: formData,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: (data) => {
-          $("#user-modal").modal('hide');
-          var oTable = $('#myTable').dataTable();
-          oTable.fnDraw(false);
-          $("#btn-save").html('submit');
-          $("#btn-save").attr("disabled", false);
-          location.reload();
-        },
-        error: function(data) {
-          console.log(data);
-        }
-      });
-    });
-
-    $('#UserFormEdit').submit(function(e) {
-      e.preventDefault();
-      var formData = new FormData(this);
-      $.ajax({
-        type: 'POST',
-        url: "{{ url('store-user')}}",
-        data: formData,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: (data) => {
-          $("#user-modal").modal('hide');
-          var oTable = $('#myTable').dataTable();
-          oTable.fnDraw(false);
-          $("#btn-save").html('submit');
-          $("#btn-save").attr("disabled", false);
-          location.reload();
-        },
-        error: function(data) {
-          console.log(data);
-        }
-      });
-    });
+   
   </script>
 
   <!-- Page Specific JS File -->

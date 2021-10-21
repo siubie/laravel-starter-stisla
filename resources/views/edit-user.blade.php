@@ -16,7 +16,7 @@
         <div class="section-body">
             <h2 class="section-title">Edit User</h2>
             <div class="card">
-                <form action="{{ route('user.update', $user->id) }}" method="POST">
+                <form action="{{ route('user.update', $user) }}" method="POST">
                     <div class="card-header">
                         <h4>Server-side Validation</h4>
                     </div>
