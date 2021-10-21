@@ -42,26 +42,31 @@
                                             <th>Email</th>
                                             <th>Status</th>
                                             <th>Action</th>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($users as $user)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $user->name }}</td>
-                                                <td>{{ $user->email }}</td>
-                                                <td>
-                                                    <div class="badge badge-success">Active</div>
-                                                </td>
-                                                <td>
-                                                    <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit" href={{ URL::to('user/' . $user->id . '/edit') }}><i class="fas fa-pencil-alt"></i></a>
-                                                                                                                                  
-                                                    <a class="btn btn-danger btn-action" id="getDeleteId" data-toggle="tooltip" title="Delete"><i class="fas fa-trash"></i></a>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($users as $user)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $user->name }}</td>
+                                            <td>{{ $user->email }}</td>
+                                            <td>{{ $user->created_at }}</td>
+                                            <td>
+                                                <div class="badge badge-success">Active</div>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit" href="javascript:void(0)" onClick="editFunc('{{ $user->id }}')"><i class="fas fa-pencil-alt"></i></a>
+                                                <form class="delete-user" action="{{route('user.destroy',$user)}}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <a class=" btn btn-danger btn-action swal-6"  data-toggle="tooltip" data-id="{{ $user->id }}" title="Delete" onClick="return false"><i class="fas fa-trash"></i></a>
+                                                    </form>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+
                             </div>
                         </div>
                     </div>

@@ -200,8 +200,8 @@
       });
     }
 
-    // delete
-    $(document).on("click", ".swal-6", function(e)  {
+     // delete
+     $(document).on("click", ".swal-6", function(e) {
       e.preventDefault();
       let id = $(this).data('user');
       console.log(id);
