@@ -203,7 +203,7 @@
     // delete
     $(document).on("click", ".swal-6", function(e)  {
       e.preventDefault();
-      let id = $(this).data('id');
+      let id = $(this).data('user');
       console.log(id);
       swal({
           title: 'Are you sure?',
@@ -214,7 +214,7 @@
         })
         .then((willDelete) => {
           if (willDelete) {
-            // $('#delete-user').submit()
+            $('#delete-user').submit()
             swal('Poof! Your imaginary file has been deleted!', {
               icon: 'success',
             });
@@ -223,6 +223,7 @@
           }
         });
     });
+
 
     // ---------------------------------------------------------------
     $('#UserForm').submit(function(e) {

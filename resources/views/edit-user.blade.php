@@ -1,6 +1,3 @@
-editUser
-
-
 @extends('layouts.app')
 <!-- {{ URL::asset('css/style.css'); }} -->
 
@@ -18,33 +15,38 @@ editUser
 
         <div class="section-body">
             <h2 class="section-title">Edit User</h2>
-
             <div class="card">
-                <!-- <form action="{{ url('user.update') }}" method="post"> -->
-                {{ Form::model($user, array('route' => array('user.update', $user->id), 'method' => 'PUT')) }}
-                <div class="card-header">
-                    <h4>Server-side Validation</h4>
-                </div>
-                <div class="card-body">
-
-                   
-                    <div class="form-group">
-                        {{ Form::label('name', 'Name') }}
-                        {{ Form::text('name', null, array('class' => 'form-control')) }}
+                <form action="{{ route('user.update', $user->id) }}" method="POST">
+                    <div class="card-header">
+                        <h4>Server-side Validation</h4>
                     </div>
-                    <div class="form-group">
-                        {{ Form::label('email', 'Email') }}
-                        {{ Form::text('email', null, array('class' => 'form-control')) }}
+                    <div class="card-body">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{$user->name}}">
+                            @error('name')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{$user->email}}">
+                            @error('email')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
                     </div>
-                   
-                </div>
-                <div class="card-footer text-right">
-                    <button class="btn btn-primary">Submit</button>
-                </div>
+                    <div class="card-footer text-right">
+                        <button class="btn btn-primary">Submit</button>
+                    </div>
                 </form>
-
             </div>
-
         </div>
     </section>
 </div>
@@ -54,4 +56,3 @@ editUser
 
 
 
-y

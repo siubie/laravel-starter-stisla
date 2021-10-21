@@ -20,9 +20,12 @@ class UserController extends Controller
     public function index()
     {
         //index -> menampilkan tabel data
-        $users = User::all();
+        // mengambil data
+        $user = User::all();
+
+        // menampilkan data
         return view('table-user')
-            ->with('users', $users);
+            ->with('users', $user);
     }
 
     /**
@@ -73,9 +76,6 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //menampilkan form edit data user
-        // $users = User::find($id);
-        // return view('edit-user', compact('users', 'users'));
         $user = User::find($id);
         return view('edit-user')
             ->with('user', $user);
@@ -91,22 +91,16 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, $id)
     {
         //mengupdate data user ke database
+        $validate = $request->validated();
+        $users = User::findOrFail($id);
 
-        $users = User::find($id);
-        // [
-        //     'name' => $request['name'],
-        //     'email' => $request['email'],
-        // ];
-        // $this->validate($request, [
-        //     'name' => 'required',        
-        //     'email' => 'required|email',
-        // ]);
-        $input = $request->all();
-        $users->fill($input)->save();
+        $users->update(array_merge(
+            $validate,
+        ));
+        // $users = User::find($id);
+        // $input = $request->all();
+        // $users->fill($input)->save();
         return redirect()->route('user.index');
-
-        // $users = User::find($id)->update($request->all());
-        // return back()->with('Success', ' User Edited Successfully!');
     }
 
     /**
@@ -119,40 +113,4 @@ class UserController extends Controller
     {
         //delete data
     }
-
-
-    // /**
-    //  * Store a newly created resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function create()
-    // {
-    //     return view('create-user');
-    // }
-    // public function store(Request $request)
-    // {
-    //     User::create([
-    //     'name' => $request->name,
-    //     'email' => $request->email,
-    //     'password' => $request->password
-    //     ]);
-    //     return redirect('table-user')->with('Success', 'User added successfully');
-    // }
-
-    // public function edit(Request $request)
-    // {
-    //     $where = array('id' => $request->id);
-    //     $user  = User::where($where)->first();
-
-    //     return Response()->json($user);
-    // }
-
-    // public function destroy(Request $request)
-    // {
-    //     $user = User::where('id', $request->id)->delete();
-
-    //     return Response()->json($user);
-    // }
 }
