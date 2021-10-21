@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use Illuminate\Http\Request;
-use DataTables;
-use Validator;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -108,5 +105,4 @@ class UserController extends Controller
         session()->flash('status', 'User was deleted!');
         return redirect()->route('user.index');
     }
-
 }
