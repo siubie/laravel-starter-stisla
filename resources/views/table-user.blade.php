@@ -57,7 +57,7 @@
                                             </td>
                                             <td class="d-flex align-items-center">
                                                 <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit" href="{{route ('user.edit', $user)}}"><i class="fas fa-pencil-alt"></i></a>
-                                                <form class="delete-user ml-2" action="{{route('user.destroy',$user)}}" method="POST" >
+                                                <form class="delete-user ml-2" action="{{route('user.destroy',$user)}}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <a class=" btn btn-danger btn-action swal-6" data-toggle="tooltip" data-id="{{ $user->id }}" title="Delete" onClick="return false"><i class="fas fa-trash"></i></a>
@@ -67,8 +67,14 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-
                             </div>
+                            <a class="btn btn-success" href="{{ route('user.export') }}">Export data</a>
+                            <br /> <br />
+                            <form style="border: 4px solid #a1a1a1;margin-top: 15px;padding: 10px;" action="{{ route('user.import') }}" class="form-horizontal" method="post" enctype="multipart/form-data">
+                                {{ csrf_field() }}
+                                <input type="file" name="import_file" />
+                                <button class="btn btn-primary">Import File</button>
+                            </form>
                         </div>
                     </div>
                 </div>
