@@ -189,7 +189,7 @@
       let id = $(this).data('user');
       console.log(id);
       swal({
-          title: 'Are you sure?',
+          title: 'Are you sure want to delete this user?',
           text: 'Once deleted, you will not be able to recover this user!',
           icon: 'warning',
           buttons: true,
@@ -201,9 +201,7 @@
             swal('Poof! User has been deleted!', {
               icon: 'success',
             });
-          } else {
-            swal('Your imaginary file is safe!');
-          }
+          } 
         });
     });
 
