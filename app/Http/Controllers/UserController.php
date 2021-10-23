@@ -7,7 +7,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Maatwebsite\Excel\Facades\Excel ;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\UsersImport;
 use Illuminate\Http\Request;
 

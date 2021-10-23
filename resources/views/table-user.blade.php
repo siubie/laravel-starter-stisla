@@ -51,7 +51,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}</td>
-                                            <td>{{ $user->created_at }}</td>
+                                            <td>{{ $user->created_at->format('d/m/Y') }}</td>
                                             <td>
                                                 <div class="badge badge-success">Active</div>
                                             </td>
