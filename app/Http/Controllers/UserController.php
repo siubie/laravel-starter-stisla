@@ -108,8 +108,9 @@ class UserController extends Controller
     {
         //delete data
         $user->delete();
-        session()->flash('status', 'User was deleted!');
-        return redirect()->route('user.index');
+        return response()->json([
+            'message' => 'Data penerbangan berhasil dihapus!'
+        ]);
     }
 
     public function export()

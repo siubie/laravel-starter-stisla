@@ -96,7 +96,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            $('#datatable').DataTable({
+            let datatable = $('#datatable').DataTable({
                 responsive: true,
                 pageLength: 10,
                 searching: false,
@@ -134,8 +134,12 @@
                         width: '20%',
                         render: function(data, type, row, meta) {
                             if (type === 'display') {
-                                return '<a href="#" class="btn btn-icon btn-sm btn-primary mr-2"><i class="fas fa-pencil-alt" title="Edit"></i></a>' +
-                                    '<a href="#" class="btn btn-icon btn-sm btn-danger"><i class="fas fa-trash" title="Delete"></i></a>'
+                                return '<a href="user/' + row.id +
+                                    '/edit" class="btn btn-icon btn-sm btn-primary mr-2"><i class="fas fa-pencil-alt" title="Edit"></i></a>' +
+                                    '<a class=" btn btn-sm btn-danger deleteButton" href="#" data-toggle="tooltip" data-id="' +
+                                    row.id +
+                                    '" title="Delete"><i class="fas fa-trash"></i></a>' +
+                                    '</form>'
                             }
                             return '-'
                         }
@@ -143,9 +147,10 @@
                 ]
             });
             // delete
-            $(document).on("click", ".swal-6", function(e) {
+            $('#datatable').on("click", ".deleteButton", function(e) {
                 e.preventDefault();
-                let id = $(this).data('user');
+                let urlDelete = $('#datatable').data('destroy');
+                let id = $(this).data('id');
                 swal({
                         title: 'Are you sure want to delete this user?',
                         text: 'Once deleted, you will not be able to recover this user!',
@@ -153,11 +158,21 @@
                         buttons: true,
                         dangerMode: true,
                     })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            $(this).closest("form").submit()
-                            swal('Poof! User has been deleted!', {
-                                icon: 'success',
+                    .then(function(result) {
+                        if (result) {
+                            e.preventDefault();
+                            $.ajax({
+                                url: urlDelete + "/" + id,
+                                type: 'DELETE',
+                                data: {
+                                    "id": id,
+                                },
+                                success: function(e) {
+                                    datatable.draw();
+                                    swal('Poof! User has been deleted!', {
+                                        icon: 'success',
+                                    });
+                                },
                             });
                         }
                     });
