@@ -17,9 +17,11 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/components.css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    @stack('customStyle')
 </head>
 
-<body>
+<body class="sidebar-mini">
     <div id="app">
         <div class="main-wrapper">
             <div class="navbar-bg"></div>
@@ -140,42 +142,13 @@
                 </ul>
             </nav>
             <div class="main-sidebar">
-                <aside id="sidebar-wrapper">
-                    <div class="sidebar-brand">
-                        <a href="index.html">Stisla</a>
-                    </div>
-                    <div class="sidebar-brand sidebar-brand-sm">
-                        <a href="index.html">St</a>
-                    </div>
-                    <ul class="sidebar-menu">
-
-                        <li class="menu-header">Starter</li>
-                        <li class="active">
-                            <a class="nav-link" href="/home"><i class="far fa-square"></i> <span>Blank
-                                    Page</span></a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i>
-                                <span>Table</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link " href="{{ route('user.index') }}">Table User</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-
-                </aside>
+                @include('layouts.sidebar')
             </div>
 
             <!-- Main Content -->
             @yield('content')
             <footer class="main-footer">
-                <div class="footer-left">
-                    Copyright &copy; 2018 <div class="bullet"></div> Design By <a
-                        href="https://nauval.in/">Muhamad Nauval Azhar</a>
-                </div>
-                <div class="footer-right">
-                    2.3.0
-                </div>
+                @include('layouts.footer')
             </footer>
         </div>
     </div>
@@ -201,31 +174,9 @@
     <script src="/assets/js/scripts.js"></script>
     <script src="/assets/js/custom.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.3/datatables.min.js"></script>
-    <script>
-        // delete
-        $(document).on("click", ".swal-6", function(e) {
-            e.preventDefault();
-            let id = $(this).data('user');
-            console.log(id);
-            swal({
-                    title: 'Are you sure want to delete this user?',
-                    text: 'Once deleted, you will not be able to recover this user!',
-                    icon: 'warning',
-                    buttons: true,
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        $(this).closest("form").submit()
-                        swal('Poof! User has been deleted!', {
-                            icon: 'success',
-                        });
-                    }
-                });
-        });
-    </script>
 
     <!-- Page Specific JS File -->
+    @stack('customScript')
 </body>
 
 </html>
