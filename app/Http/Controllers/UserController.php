@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\UsersImport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
@@ -25,7 +27,7 @@ class UserController extends Controller
         $user = User::all();
 
         // menampilkan data
-        return view('table-user')
+        return view('users.index')
             ->with('users', $user);
     }
 
@@ -37,7 +39,7 @@ class UserController extends Controller
     public function create()
     {
         // halaman tambah user
-        return view('create-user');
+        return view('users.create');
     }
 
     /**
@@ -76,7 +78,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('edit-user')
+        return view('users.edit')
             ->with('user', $user);
     }
 
@@ -127,5 +129,30 @@ class UserController extends Controller
             ]);
         }
         return redirect()->route('user.index');
+    }
+
+    public function filter(Request $request)
+    {
+        // 1. ambil data user
+        $users = DB::table('users')
+            ->when($request->input('name'), function ($query, $data) {
+                return $query->where('name', $data);
+            })
+            ->when($request->input('email'), function ($query, $data) {
+                return $query->where('email', $data);
+            })
+            ->selectRaw("
+            id,
+            name,
+            email,
+            DATE_FORMAT(created_at,'%d-%m-%Y') as date
+            ")
+            ->get();
+
+        // 2. ubah data user berupa datatable
+        $datatable = DataTables::of($users)->make(true);
+
+        // 3. return datatable
+        return $datatable;
     }
 }
