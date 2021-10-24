@@ -25,7 +25,7 @@ class UserController extends Controller
         $user = User::all();
 
         // menampilkan data
-        return view('table-user')
+        return view('users.index')
             ->with('users', $user);
     }
 
@@ -37,7 +37,7 @@ class UserController extends Controller
     public function create()
     {
         // halaman tambah user
-        return view('create-user');
+        return view('users.create');
     }
 
     /**
@@ -76,7 +76,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('edit-user')
+        return view('users.edit')
             ->with('user', $user);
     }
 
