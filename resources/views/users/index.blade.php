@@ -51,19 +51,21 @@
                             <button class="btn btn-secondary" type="reset">Reset</button>
                         </div>
 
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered" id="datatable"
-                                data-url="{{ route('user.filter') }}" data-destroy="{{ url('user') }}">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Created At</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
+                        <div class="col-lg-12">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered" id="datatable"
+                                    data-url="{{ route('user.filter') }}" data-destroy="{{ url('user') }}">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Created At</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
                         </div>
 
                         <div class="custom-file mt-5">
@@ -132,7 +134,8 @@
                         width: '20%',
                         render: function(data, type, row, meta) {
                             if (type === 'display') {
-                                return '<a href="#" class="btn btn-icon btn-sm btn-primary"><i class="fas fa-pencil" title="Edit"></i></a>'
+                                return '<a href="#" class="btn btn-icon btn-sm btn-primary mr-2"><i class="fas fa-pencil-alt" title="Edit"></i></a>' +
+                                    '<a href="#" class="btn btn-icon btn-sm btn-danger"><i class="fas fa-trash" title="Delete"></i></a>'
                             }
                             return '-'
                         }
