@@ -27,34 +27,25 @@
 
                     <div class="card-body">
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <label for="inputEmail4">Email</label>
-                                <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputPassword4">Password</label>
-                                <input type="password" class="form-control" id="inputPassword4" placeholder="Password"
-                                    style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAkCAYAAADo6zjiAAAAAXNSR0IArs4c6QAAAbNJREFUWAntV8FqwkAQnaymUkpChB7tKSfxWCie/Yb+gbdeCqGf0YsQ+hU95QNyDoWCF/HkqdeiIaEUqyZ1ArvodrOHxanQOiCzO28y781skKwFW3scPV1/febP69XqarNeNTB2KGs07U3Ttt/Ozp3bh/u7V7muheQf6ftLUWyYDB5yz1ijuPAub2QRDDunJsdGkAO55KYYjl0OUu1VXOzQZ64Tr+IiPXedGI79bQHdbheCIAD0dUY6gV6vB67rAvo6IxVgWVbFy71KBKkAFaEc2xPQarXA931ot9tyHphiPwpJgSbfe54Hw+EQHMfZ/msVEEURjMfjCjbFeG2dFxPo9/sVOSYzxmAwGIjnTDFRQLMQAjQ5pJAQkCQJ5HlekeERxHEsiE0xUUCzEO9AmqYQhiF0Oh2Yz+ewWCzEY6aYKKBZCAGYs1wuYTabKdNNMWWxnaA4gp3Yry5JBZRlWTXDvaozUgGTyQSyLAP0dbb3DtQlmcan0yngT2ekE9ARc+z4AvC7nauh9iouhpcGamJeX8XF8MaClwaeROWRA7nk+tUnyzGvZrKg0/40gdME/t8EvgG0/NOS6v9NHQAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;"
-                                    autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inputCity">City</label>
-                                <input type="text" class="form-control" id="inputCity">
+                                <input type="email" name="email" class="form-control" id="email" placeholder="Email">
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="inputState">State</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected="">Choose...</option>
-                                    <option>...</option>
+                                <label for="inputPassword4">Username</label>
+                                <input type="text" name="username" class="form-control" id="username"
+                                    placeholder="Username">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputState">Level</label>
+                                <select id="inputState" class="form-control select2">
+                                    <option selected="">Pilih Salah Satu</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="user">User</option>
                                 </select>
                             </div>
-                            <div class="form-group col-md-2">
-                                <label for="inputZip">Zip</label>
-                                <input type="text" class="form-control" id="inputZip">
-                            </div>
                         </div>
+
                         <div class="card-footer text-right">
                             <button class="btn btn-primary mr-1" type="submit">Submit</button>
                             <button class="btn btn-secondary" type="reset">Reset</button>
@@ -120,26 +111,36 @@
     </div>
 @endsection
 @push('customScript')
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.3/datatables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
-        // delete
-        $(document).on("click", ".swal-6", function(e) {
-            e.preventDefault();
-            let id = $(this).data('user');
-            swal({
-                    title: 'Are you sure want to delete this user?',
-                    text: 'Once deleted, you will not be able to recover this user!',
-                    icon: 'warning',
-                    buttons: true,
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        $(this).closest("form").submit()
-                        swal('Poof! User has been deleted!', {
-                            icon: 'success',
-                        });
-                    }
-                });
+        $(document).ready(function() {
+            // delete
+            $(document).on("click", ".swal-6", function(e) {
+                e.preventDefault();
+                let id = $(this).data('user');
+                swal({
+                        title: 'Are you sure want to delete this user?',
+                        text: 'Once deleted, you will not be able to recover this user!',
+                        icon: 'warning',
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            $(this).closest("form").submit()
+                            swal('Poof! User has been deleted!', {
+                                icon: 'success',
+                            });
+                        }
+                    });
+            });
+            $('.select2').select2({});
         });
     </script>
+@endpush
+
+@push('customStyle')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 @endpush
