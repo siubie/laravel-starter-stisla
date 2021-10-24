@@ -13,6 +13,7 @@
                 </div>
             </div>
             <div class="section-body">
+                <h2 class="section-title">Manajemen User</h2>
                 <div class="row">
                     <div class="col-12">
                         <div class="card card-primary">
