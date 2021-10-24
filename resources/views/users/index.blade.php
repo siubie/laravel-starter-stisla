@@ -51,48 +51,20 @@
                             <button class="btn btn-secondary" type="reset">Reset</button>
                         </div>
                         <div class="table-responsive">
-                            <table id="myTable" class="table table-stripped">
+                            <table class="table table-striped table-md" id="datatable"
+                                data-url="{{ route('user.filter') }}" data-destroy="{{ url('user') }}">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
                                         <th>Name</th>
                                         <th>Email</th>
-                                        <th>Created at</th>
-                                        <th>Status</th>
+                                        <th>Created At</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach ($users as $user)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $user->name }}</td>
-                                            <td>{{ $user->email }}</td>
-                                            <td>{{ $user->created_at->format('d/m/Y') }}</td>
-                                            <td>
-                                                <div class="badge badge-success">Active</div>
-                                            </td>
-                                            <td class="d-flex align-items-center">
-                                                <a class="btn btn-icon btn-sm btn-primary mr-1" data-toggle="tooltip"
-                                                    title="Edit" href="{{ route('user.edit', $user) }}">
-                                                    <i class="fas fa-pencil-alt"></i>
-                                                </a>
-                                                <form class="delete-user ml-2" action="{{ route('user.destroy', $user) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <a class="btn btn-icon btn-sm btn-danger swal-6" data-toggle="tooltip"
-                                                        data-id="{{ $user->id }}" title="Delete" onClick="return false"
-                                                        href="#">
-                                                        <i class="fas fa-trash"></i>
-                                                    </a>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
+                                <tbody></tbody>
                             </table>
                         </div>
+
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="customFile">
                             <label class="custom-file-label" for="customFile">Choose file</label>
@@ -115,6 +87,13 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function() {
+            //datatable
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $('#datatable').DataTable({});
             // delete
             $(document).on("click", ".swal-6", function(e) {
                 e.preventDefault();
@@ -135,6 +114,7 @@
                         }
                     });
             });
+            //select2
             $('.select2').select2({});
         });
     </script>
@@ -142,5 +122,4 @@
 
 @push('customStyle')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
 @endpush

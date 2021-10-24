@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\UsersImport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
@@ -127,5 +129,33 @@ class UserController extends Controller
             ]);
         }
         return redirect()->route('user.index');
+    }
+
+    public function data(Request $request)
+    {
+        // 1. ambil data user
+        $flights = DB::table('users')
+            ->when($request->input('flight_no'), function ($query, $data) {
+                return $query->where('flight_no', $data);
+            })
+            ->when($request->input('date'), function ($query, $data) {
+                return $query->where('date', $data);
+            })
+            ->when($request->input('status'), function ($query, $data) {
+                return $query->where('status', $data);
+            })
+            ->selectRaw("
+            id,
+            username,
+            email,
+            DATE_FORMAT(date,'%d-%m-%Y') as date,
+            ")
+            ->get();
+
+        // 2. ubah data user berupa datatable
+        $datatable = DataTables::of($flights)->make(true);
+
+        // 3. return datatable
+        return $datatable;
     }
 }
