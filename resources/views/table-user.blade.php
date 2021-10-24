@@ -59,17 +59,20 @@
                                                         <div class="badge badge-success">Active</div>
                                                     </td>
                                                     <td class="d-flex align-items-center">
-                                                        <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip"
-                                                            title="Edit" href="{{ route('user.edit', $user) }}"><i
-                                                                class="fas fa-pencil-alt"></i></a>
+                                                        <a class="btn btn-icon btn-sm btn-primary mr-1"
+                                                            data-toggle="tooltip" title="Edit"
+                                                            href="{{ route('user.edit', $user) }}">
+                                                            <i class="fas fa-pencil-alt"></i>
+                                                        </a>
                                                         <form class="delete-user ml-2"
                                                             action="{{ route('user.destroy', $user) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <a class=" btn btn-danger btn-action swal-6"
+                                                            <a class="btn btn-icon btn-sm btn-danger swal-6"
                                                                 data-toggle="tooltip" data-id="{{ $user->id }}"
-                                                                title="Delete" onClick="return false"><i
-                                                                    class="fas fa-trash"></i></a>
+                                                                title="Delete" onClick="return false" href="#">
+                                                                <i class="fas fa-trash"></i>
+                                                            </a>
                                                         </form>
                                                     </td>
                                                 </tr>
