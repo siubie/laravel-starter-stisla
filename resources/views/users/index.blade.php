@@ -51,19 +51,21 @@
                             <button class="btn btn-secondary" type="reset">Reset</button>
                         </div>
 
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered" id="datatable"
-                                data-url="{{ route('user.filter') }}" data-destroy="{{ url('user') }}">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Created At</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
+                        <div class="col-lg-12">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered" id="datatable"
+                                    data-url="{{ route('user.filter') }}" data-destroy="{{ url('user') }}">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Created At</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
                         </div>
 
                         <div class="custom-file mt-5">
@@ -94,7 +96,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            $('#datatable').DataTable({
+            let datatable = $('#datatable').DataTable({
                 responsive: true,
                 pageLength: 10,
                 searching: false,
@@ -115,22 +117,40 @@
                 }],
                 columns: [{
                         data: 'name',
+                        width: '20%'
                     },
                     {
                         data: 'email',
+                        width: '20%'
                     },
                     {
                         data: 'date',
+                        width: '20%'
                     },
                     {
-                        data: 'action',
+                        data: 'null',
+                        name: 'action',
+                        sortable: false,
+                        width: '20%',
+                        render: function(data, type, row, meta) {
+                            if (type === 'display') {
+                                return '<a href="user/' + row.id +
+                                    '/edit" class="btn btn-icon btn-sm btn-primary mr-2"><i class="fas fa-pencil-alt" title="Edit"></i></a>' +
+                                    '<a class=" btn btn-sm btn-danger deleteButton" href="#" data-toggle="tooltip" data-id="' +
+                                    row.id +
+                                    '" title="Delete"><i class="fas fa-trash"></i></a>' +
+                                    '</form>'
+                            }
+                            return '-'
+                        }
                     },
                 ]
             });
             // delete
-            $(document).on("click", ".swal-6", function(e) {
+            $('#datatable').on("click", ".deleteButton", function(e) {
                 e.preventDefault();
-                let id = $(this).data('user');
+                let urlDelete = $('#datatable').data('destroy');
+                let id = $(this).data('id');
                 swal({
                         title: 'Are you sure want to delete this user?',
                         text: 'Once deleted, you will not be able to recover this user!',
@@ -138,11 +158,21 @@
                         buttons: true,
                         dangerMode: true,
                     })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            $(this).closest("form").submit()
-                            swal('Poof! User has been deleted!', {
-                                icon: 'success',
+                    .then(function(result) {
+                        if (result) {
+                            e.preventDefault();
+                            $.ajax({
+                                url: urlDelete + "/" + id,
+                                type: 'DELETE',
+                                data: {
+                                    "id": id,
+                                },
+                                success: function(e) {
+                                    datatable.draw();
+                                    swal('Poof! User has been deleted!', {
+                                        icon: 'success',
+                                    });
+                                },
                             });
                         }
                     });
