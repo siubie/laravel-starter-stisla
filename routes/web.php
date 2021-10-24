@@ -25,5 +25,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('user', UserController::class);
     Route::post('import', [UserController::class, 'import'])->name('user.import');
     Route::get('export', [UserController::class, 'export'])->name('user.export');
-    Route::post('user/filter', [UserController::class, 'data'])->name('user.filter');
+    Route::post('user/filter', [UserController::class, 'filter'])->name('user.filter');
 });

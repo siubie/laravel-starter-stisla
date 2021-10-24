@@ -50,8 +50,9 @@
                             <button class="btn btn-primary mr-1" type="submit">Submit</button>
                             <button class="btn btn-secondary" type="reset">Reset</button>
                         </div>
+
                         <div class="table-responsive">
-                            <table class="table table-striped table-md" id="datatable"
+                            <table class="table table-striped table-bordered" id="datatable"
                                 data-url="{{ route('user.filter') }}" data-destroy="{{ url('user') }}">
                                 <thead>
                                     <tr>
@@ -65,7 +66,7 @@
                             </table>
                         </div>
 
-                        <div class="custom-file">
+                        <div class="custom-file mt-5">
                             <input type="file" class="custom-file-input" id="customFile">
                             <label class="custom-file-label" for="customFile">Choose file</label>
                         </div>
@@ -93,7 +94,39 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            $('#datatable').DataTable({});
+            $('#datatable').DataTable({
+                responsive: true,
+                pageLength: 10,
+                searching: false,
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: $("#datatable").data('url'),
+                    type: "POST",
+                    data: function(d) {
+                        d.flight_no = $("#flight_no").val();
+                        d.date = $("#date").val();
+                        d.status = $("#status").val();
+                    }
+                },
+                columnDefs: [{
+                    "defaultContent": "-",
+                    "targets": "_all"
+                }],
+                columns: [{
+                        data: 'name',
+                    },
+                    {
+                        data: 'email',
+                    },
+                    {
+                        data: 'date',
+                    },
+                    {
+                        data: 'action',
+                    },
+                ]
+            });
             // delete
             $(document).on("click", ".swal-6", function(e) {
                 e.preventDefault();
@@ -121,5 +154,7 @@
 @endpush
 
 @push('customStyle')
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.11.3/datatables.min.css" />
+
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endpush

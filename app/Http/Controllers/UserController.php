@@ -131,29 +131,26 @@ class UserController extends Controller
         return redirect()->route('user.index');
     }
 
-    public function data(Request $request)
+    public function filter(Request $request)
     {
         // 1. ambil data user
-        $flights = DB::table('users')
-            ->when($request->input('flight_no'), function ($query, $data) {
-                return $query->where('flight_no', $data);
+        $users = DB::table('users')
+            ->when($request->input('name'), function ($query, $data) {
+                return $query->where('name', $data);
             })
-            ->when($request->input('date'), function ($query, $data) {
-                return $query->where('date', $data);
-            })
-            ->when($request->input('status'), function ($query, $data) {
-                return $query->where('status', $data);
+            ->when($request->input('email'), function ($query, $data) {
+                return $query->where('email', $data);
             })
             ->selectRaw("
             id,
-            username,
+            name,
             email,
-            DATE_FORMAT(date,'%d-%m-%Y') as date,
+            DATE_FORMAT(created_at,'%d-%m-%Y') as date
             ")
             ->get();
 
         // 2. ubah data user berupa datatable
-        $datatable = DataTables::of($flights)->make(true);
+        $datatable = DataTables::of($users)->make(true);
 
         // 3. return datatable
         return $datatable;
