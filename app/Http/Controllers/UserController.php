@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\UsersExport;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\UsersImport;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -103,6 +107,25 @@ class UserController extends Controller
         //delete data
         $user->delete();
         session()->flash('status', 'User was deleted!');
+        return redirect()->route('user.index');
+    }
+
+    public function export()
+    {
+        // export data ke excel
+        return Excel::download(new UsersExport, 'users.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        // import excel ke data tables
+        $users = Excel::toCollection(new UsersImport, $request->import_file);
+        foreach ($users[0] as $user) {
+            User::where('id', $user[0])->update([
+                'name' => $user[1],
+                'email' => $user[2],
+            ]);
+        }
         return redirect()->route('user.index');
     }
 }

@@ -5,11 +5,11 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Form Validation User</h1>
+            <h1>Form Edit User</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
                 <div class="breadcrumb-item"><a href="#">Forms</a></div>
-                <div class="breadcrumb-item">Form Validation</div>
+                <div class="breadcrumb-item">Form Edit User</div>
             </div>
         </div>
 
@@ -18,7 +18,7 @@
             <div class="card">
                 <form action="{{ route('user.update', $user) }}" method="POST">
                     <div class="card-header">
-                        <h4>Server-side Validation</h4>
+                        <h4>Validasi Edit Data User</h4>
                     </div>
                     <div class="card-body">
                         @csrf
