@@ -54,7 +54,7 @@ class UserController extends Controller
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
         ]);
-        return redirect(route('user.index'));
+        return redirect(route('user.index'))->with('success', 'Data Berhasil Ditambahkan');;
     }
 
     /**
@@ -93,7 +93,7 @@ class UserController extends Controller
         $validate = $request->validated();
 
         $user->update($validate);
-        return redirect()->route('user.index');
+        return redirect()->route('user.index')->with('success', 'User Berhasil Diupdate');
     }
 
     /**
