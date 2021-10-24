@@ -125,7 +125,6 @@
         $(document).on("click", ".swal-6", function(e) {
             e.preventDefault();
             let id = $(this).data('user');
-            console.log(id);
             swal({
                     title: 'Are you sure want to delete this user?',
                     text: 'Once deleted, you will not be able to recover this user!',
@@ -143,5 +142,4 @@
                 });
         });
     </script>
-
 @endpush
