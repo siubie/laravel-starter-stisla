@@ -137,10 +137,10 @@ class UserController extends Controller
         // 1. ambil data user
         $users = DB::table('users')
             ->when($request->input('name'), function ($query, $data) {
-                return $query->where('name', $data);
+                return $query->where('name', 'like', '%' . $data . '%');
             })
             ->when($request->input('email'), function ($query, $data) {
-                return $query->where('email', $data);
+                return $query->where('email', 'like', '%' . $data . '%');
             })
             ->selectRaw("
             id,
