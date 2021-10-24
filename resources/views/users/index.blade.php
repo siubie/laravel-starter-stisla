@@ -115,15 +115,27 @@
                 }],
                 columns: [{
                         data: 'name',
+                        width: '20%'
                     },
                     {
                         data: 'email',
+                        width: '20%'
                     },
                     {
                         data: 'date',
+                        width: '20%'
                     },
                     {
-                        data: 'action',
+                        data: 'null',
+                        name: 'action',
+                        sortable: false,
+                        width: '20%',
+                        render: function(data, type, row, meta) {
+                            if (type === 'display') {
+                                return '<a href="#" class="btn btn-icon btn-sm btn-primary"><i class="fas fa-pencil" title="Edit"></i></a>'
+                            }
+                            return '-'
+                        }
                     },
                 ]
             });
