@@ -28,13 +28,13 @@
                             <a class="btn btn-icon icon-left btn-primary" href="{{ route('user.create') }}">
                                 <i class="fa fa-users" aria-hidden="true"></i>
                                 Create New User</a>
-                            <a class="btn btn-info" href="{{ route('user.export') }}">
-                                <i class="fa fa-upload" aria-hidden="true"></i>
-                                Export data</a>
-                            <a class="btn btn-info click">
+                            <a class="btn btn-info btn-primary active click">
                                 <i class="fa fa-download" aria-hidden="true"></i>
                                 Import data</a>
-                            <a class="btn btn-info click1">
+                            <a class="btn btn-info btn-primary active" href="{{ route('user.export') }}">
+                                <i class="fa fa-upload" aria-hidden="true"></i>
+                                Export data</a>
+                            <a class="btn btn-info btn-primary active click1">
                                 <i class="fa fa-search" aria-hidden="true"></i>
                                 Search data</a>
                         </div>
@@ -43,9 +43,10 @@
                         <div class="custom-file">
                             <form action="{{ route('user.import') }}" method="post" enctype="multipart/form-data">
                                 {{ csrf_field() }}
-                                <input type="file" class="custom-file-input" name="import_file">
-                                <label class="custom-file-label"></label>
-                                <div class="card-footer text-right">
+                                <label class="custom-file-label" for="file-upload">Choose File</label>
+                                <input type="file" id="file-upload" class="custom-file-input" name="import_file">
+                                <br /> <br />
+                                <div class="footer text-right">
                                     <button class="btn btn-primary">Import File</button>
                                 </div>
                             </form>
@@ -71,8 +72,7 @@
                                     </select>
                                 </div>
                             </div>
-
-                            <div class="card-footer text-right">
+                            <div class="text-right">
                                 <button class="btn btn-primary mr-1" type="submit">Submit</button>
                                 <button class="btn btn-secondary" type="reset" id="btnReset">Reset</button>
                             </div>
@@ -105,6 +105,7 @@
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.3/datatables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
+    //show hide label import
     $(document).ready(function() {
         $(".showup").hide();
         $(".showup1").hide();
@@ -133,6 +134,12 @@
 
     $(document).on("click1", function() {
         $(".showup1").hide();
+    });
+
+    $('#file-upload').change(function() {
+        var i = $(this).prev('label').clone();
+        var file = $('#file-upload')[0].files[0].name;
+        $(this).prev('label').text(file);
     });
 </script>
 <script>
