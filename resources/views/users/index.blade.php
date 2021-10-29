@@ -105,44 +105,6 @@
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.3/datatables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
-    //show hide label import
-    $(document).ready(function() {
-        $(".showup").hide();
-        $(".showup1").hide();
-        $('.click').click(function(event) {
-            event.stopPropagation();
-            $(".showup").slideToggle("fast");
-            $(".showup1").hide();
-        });
-        $(".showup").on("click", function(event) {
-            event.stopPropagation();
-        });
-
-        $('.click1').click(function(event) {
-            event.stopPropagation();
-            $(".showup1").slideToggle("fast");
-            $(".showup").hide();
-        });
-        $(".showup1").on("click1", function(event) {
-            event.stopPropagation();
-        });
-    });
-
-    $(document).on("click", function() {
-        $(".showup").hide();
-    });
-
-    $(document).on("click1", function() {
-        $(".showup1").hide();
-    });
-
-    $('#file-upload').change(function() {
-        var i = $(this).prev('label').clone();
-        var file = $('#file-upload')[0].files[0].name;
-        $(this).prev('label').text(file);
-    });
-</script>
-<script>
     $(document).ready(function() {
         //datatable
         $.ajaxSetup({
@@ -242,6 +204,40 @@
             $('#search').trigger("reset");
             datatable.draw();
         });
+        //show hide toggle
+        $(".showup").hide();
+        $(".showup1").hide();
+        $('.click').click(function(event) {
+            event.stopPropagation();
+            $(".showup").slideToggle("fast");
+            $(".showup1").hide();
+        });
+        $(".showup").on("click", function(event) {
+            event.stopPropagation();
+        });
+
+        $('.click1').click(function(event) {
+            event.stopPropagation();
+            $(".showup1").slideToggle("fast");
+            $(".showup").hide();
+        });
+        $(".showup1").on("click1", function(event) {
+            event.stopPropagation();
+        });
+
+        $(document).on("click", function() {
+        $(".showup").hide();
+    });
+
+    $(document).on("click1", function() {
+        $(".showup1").hide();
+    });
+    //ganti label berdasarkan nama file
+    $('#file-upload').change(function() {
+        var i = $(this).prev('label').clone();
+        var file = $('#file-upload')[0].files[0].name;
+        $(this).prev('label').text(file);
+    });
     });
 </script>
 @endpush
