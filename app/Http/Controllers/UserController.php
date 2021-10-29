@@ -127,6 +127,7 @@ class UserController extends Controller
             User::where('id', $user[0])->update([
                 'name' => $user[1],
                 'email' => $user[2],
+                'password' => $user[3],
             ]);
         }
         return redirect()->route('user.index');
