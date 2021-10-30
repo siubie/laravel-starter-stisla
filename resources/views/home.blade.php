@@ -10,6 +10,10 @@
             </div>
         </div>
         <div class="section-body">
-        </div>
+            @hasrole('writer')
+                I am a writer!
+            @else
+                I am not a writer...
+            @endhasrole
     </section>
 @endsection
