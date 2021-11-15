@@ -12,6 +12,8 @@ use App\Imports\UsersImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class UserController extends Controller
 {
@@ -25,6 +27,8 @@ class UserController extends Controller
         //index -> menampilkan tabel data
         // mengambil data
         $user = User::all();
+        //Role::create(['name' => 'user']);
+        //Permission::create(['name' => 'manage user']);
 
         // menampilkan data
         return view('users.index')
@@ -39,7 +43,13 @@ class UserController extends Controller
     public function create()
     {
         // halaman tambah user
-        return view('users.create');
+        $roles = Role::pluck('name', 'name')->all();
+        $permission = Permission::pluck('name', 'name')->all();
+        $rolePermissions = DB::table("role_has_permissions")
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+
+        return view('users.create', compact('roles', 'permission', 'rolePermissions'));
     }
 
     /**
@@ -51,11 +61,18 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         //simpan data
-        User::create([
+        $user = User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
+            'level' => $request['level'],
+            'permission' => $request['permission'],
+
         ]);
+        $user->assignRole($request->input('level'));
+        // $user->givePermissionTo($request['permission']);
+
+
         return redirect(route('user.index'))->with('success', 'Data Berhasil Ditambahkan');;
     }
 
@@ -143,10 +160,19 @@ class UserController extends Controller
             ->when($request->input('email'), function ($query, $data) {
                 return $query->where('email', 'like', '%' . $data . '%');
             })
+            ->when($request->input('level'), function ($query, $data) {
+                return $query->where(
+                    'level',
+                    'like',
+                    '%' . $data . '%'
+                );
+            })
             ->selectRaw("
             id,
             name,
             email,
+            level,
+            permission,
             DATE_FORMAT(created_at,'%d-%m-%Y') as date
             ")
             ->get();
@@ -156,5 +182,9 @@ class UserController extends Controller
 
         // 3. return datatable
         return $datatable;
+    }
+
+    public function create_role()
+    {
     }
 }

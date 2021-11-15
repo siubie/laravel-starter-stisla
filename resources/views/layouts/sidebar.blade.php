@@ -17,7 +17,7 @@
                 <span>User Management</span></a>
             <ul class="dropdown-menu">
                 <li><a class="nav-link " href="{{ route('user.index') }}">Users List</a></li>
-                <li><a class="nav-link " href="#">Roles</a></li>
+                <li><a class="nav-link " href="/role">Roles</a></li>
             </ul>
         </li>
     </ul>
