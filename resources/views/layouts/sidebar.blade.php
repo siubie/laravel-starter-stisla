@@ -17,7 +17,16 @@
                 <span>User Management</span></a>
             <ul class="dropdown-menu">
                 <li><a class="nav-link " href="{{ route('user.index') }}">Users List</a></li>
+                <li><a class="nav-link " href="{{ route('user.create') }}">Create User</a></li>
+            </ul>
+        </li>
+        <li class="nav-item dropdown">
+            <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i>
+                <span>Role and Permission</span></a>
+            <ul class="dropdown-menu">
                 <li><a class="nav-link " href="#">Roles</a></li>
+                <li><a class="nav-link " href="#">Permission</a></li>
+                <li><a class="nav-link " href="#">Assign Role</a></li>
             </ul>
         </li>
     </ul>
