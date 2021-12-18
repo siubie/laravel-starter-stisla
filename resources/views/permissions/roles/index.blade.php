@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="text-right">
                                         <button class="btn btn-primary mr-1" type="submit">Submit</button>
-                                        <button class="btn btn-secondary" type="reset" id="btnReset">Reset</button>
+                                        <a class="btn btn-secondary" href="{{route('role.index')}}">Reset</a>
                                     </div>
                                 </form>
                             </div>
