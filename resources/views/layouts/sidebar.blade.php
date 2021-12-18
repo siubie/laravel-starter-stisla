@@ -24,7 +24,7 @@
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i>
                 <span>Role and Permission</span></a>
             <ul class="dropdown-menu">
-                <li><a class="nav-link " href="#">Roles</a></li>
+                <li><a class="nav-link " href="{{route('role.index')}}">Roles</a></li>
                 <li><a class="nav-link " href="#">Permission</a></li>
                 <li><a class="nav-link " href="#">Assign Role</a></li>
             </ul>
