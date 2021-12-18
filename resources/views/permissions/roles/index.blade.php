@@ -4,7 +4,7 @@
     <!-- Main Content -->
     <section class="section">
         <div class="section-header">
-            <h1>Table</h1>
+            <h1>Role and Permission</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
                 <div class="breadcrumb-item"><a href="#">Components</a></div>
@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="section-body">
-            <h2 class="section-title">Role And Permission</h2>
+            <h2 class="section-title">Role Management</h2>
 
             <div class="row">
                 <div class="col-12">
@@ -25,12 +25,12 @@
                         <div class="card-header">
                             <h4>Roles List</h4>
                             <div class="card-header-action">
-                                <a class="btn btn-icon icon-left btn-primary" href="{{ route('user.create') }}">Create New
+                                <a class="btn btn-icon icon-left btn-primary" href="{{ route('role.create') }}">Create New
                                     Role</a>
                                 <a class="btn btn-info btn-primary active import">
                                     <i class="fa fa-download" aria-hidden="true"></i>
                                     Import Role</a>
-                                <a class="btn btn-info btn-primary active" href="{{ route('user.export') }}">
+                                <a class="btn btn-info btn-primary active" href="{{ route('role.export') }}">
                                     <i class="fa fa-upload" aria-hidden="true"></i>
                                     Export Role</a>
                                 <a class="btn btn-info btn-primary active search">
@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                             <div class="show-search mb-3" style="display: none">
-                                <form id="search" method="GET" action="{{route('role.index')}}" >
+                                <form id="search" method="GET" action="{{ route('role.index') }}">
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="role">Role</label>
@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="text-right">
                                         <button class="btn btn-primary mr-1" type="submit">Submit</button>
-                                        <a class="btn btn-secondary" href="{{route('role.index')}}">Reset</a>
+                                        <a class="btn btn-secondary" href="{{ route('role.index') }}">Reset</a>
                                     </div>
                                 </form>
                             </div>
@@ -77,7 +77,7 @@
                                         </tr>
                                         @foreach ($roles as $key => $role)
                                             <tr>
-                                                <td>{{ ($roles->currentPage()-1) * $roles->perPage() + $key +1}}</td>
+                                                <td>{{ ($roles->currentPage() - 1) * $roles->perPage() + $key + 1 }}</td>
                                                 <td>{{ $role->name }}</td>
                                                 <td class="text-right">
                                                     <a href="#" class="btn btn-sm btn-info btn-icon "><i
