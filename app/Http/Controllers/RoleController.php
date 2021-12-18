@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
@@ -14,9 +15,12 @@ class RoleController extends Controller
      */
     public function index(Request $request)
     {
-        //
-        $roles = Role::paginate(2);
-        return view('permissions.roles.index',compact('roles'));
+        $roles = DB::table('roles')
+            ->when($request->input('name'), function ($query, $name) {
+                return $query->where('name', 'like', '%' . $name . '%');
+            })
+            ->paginate(1);
+        return view('permissions.roles.index', compact('roles'));
     }
 
     /**

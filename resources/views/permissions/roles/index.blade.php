@@ -52,26 +52,13 @@
                                     </form>
                                 </div>
                             </div>
-                            <div class="show-search" style="display: none">
-                                <form id="search">
+                            <div class="show-search mb-3" style="display: none">
+                                <form id="search" method="GET" action="{{route('role.index')}}" >
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
-                                            <label for="inputEmail4">Email</label>
-                                            <input type="text" name="email" class="form-control" id="email"
-                                                placeholder="Email">
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="inputPassword4">Username</label>
+                                            <label for="role">Role</label>
                                             <input type="text" name="name" class="form-control" id="name"
-                                                placeholder="name">
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="level">Level</label>
-                                            <select id="level" class="form-control select2">
-                                                <option value="" selected>Pilih Salah Satu</option>
-                                                <option value="admin">Admin</option>
-                                                <option value="user">User</option>
-                                            </select>
+                                                placeholder="Role Name">
                                         </div>
                                     </div>
                                     <div class="text-right">
@@ -105,7 +92,7 @@
                                     </tbody>
                                 </table>
                                 <div class="d-flex justify-content-center">
-                                    {{ $roles->links() }}
+                                    {{ $roles->withQueryString()->links() }}
                                 </div>
                             </div>
                         </div>
