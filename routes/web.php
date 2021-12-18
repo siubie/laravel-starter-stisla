@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Controllers\RoleController;
+use App\Http\Controllers\RoleAndPermission\ExportRoleController;
+use App\Http\Controllers\RoleAndPermission\ImportRoleController;
+use App\Http\Controllers\RoleAndPermission\RoleController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Http\Controllers\UserController;
@@ -28,4 +30,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('export', [UserController::class, 'export'])->name('user.export');
     Route::post('user/filter', [UserController::class, 'filter'])->name('user.filter');
     Route::resource('role', RoleController::class);
+    Route::get('role/export', ExportRoleController::class)->name('role.export');
+    Route::post('role/import', ImportRoleController::class)->name('role.import');
 });

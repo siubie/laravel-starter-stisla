@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\RoleAndPermission;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
@@ -19,7 +19,7 @@ class RoleController extends Controller
             ->when($request->input('name'), function ($query, $name) {
                 return $query->where('name', 'like', '%' . $name . '%');
             })
-            ->paginate(1);
+            ->paginate(10);
         return view('permissions.roles.index', compact('roles'));
     }
 
