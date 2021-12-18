@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RolesController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Http\Controllers\UserController;
@@ -26,4 +27,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('import', [UserController::class, 'import'])->name('user.import');
     Route::get('export', [UserController::class, 'export'])->name('user.export');
     Route::post('user/filter', [UserController::class, 'filter'])->name('user.filter');
+    Route::resource('role', RolesController::class);
 });

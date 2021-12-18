@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class Roles extends Controller
+class PermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -40,10 +40,10 @@ class Roles extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Roles  $roles
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Roles $roles)
+    public function show($id)
     {
         //
     }
@@ -51,10 +51,10 @@ class Roles extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Roles  $roles
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Roles $roles)
+    public function edit($id)
     {
         //
     }
@@ -63,10 +63,10 @@ class Roles extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Roles  $roles
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Roles $roles)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -74,10 +74,10 @@ class Roles extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Roles  $roles
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Roles $roles)
+    public function destroy($id)
     {
         //
     }
