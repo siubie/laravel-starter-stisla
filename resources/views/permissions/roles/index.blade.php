@@ -25,7 +25,8 @@
                         <div class="card-header">
                             <h4>Roles List</h4>
                             <div class="card-header-action">
-                                <a class="btn btn-icon icon-left btn-primary" href="{{ route('user.create') }}">Create New Role</a>
+                                <a class="btn btn-icon icon-left btn-primary" href="{{ route('user.create') }}">Create New
+                                    Role</a>
                                 <a class="btn btn-info btn-primary active import">
                                     <i class="fa fa-download" aria-hidden="true"></i>
                                     Import Role</a>
@@ -37,69 +38,81 @@
                                     Search Role</a>
                             </div>
                         </div>
-                        <div class="card-body show-import" style="display: none">
-                            <div class="custom-file">
-                                <form action="{{ route('user.import') }}" method="post" enctype="multipart/form-data">
-                                    {{ csrf_field() }}
-                                    <label class="custom-file-label" for="file-upload">Choose File</label>
-                                    <input type="file" id="file-upload" class="custom-file-input" name="import_file">
-                                    <br /> <br />
-                                    <div class="footer text-right">
-                                        <button class="btn btn-primary">Import File</button>
+                        <div class="card-body">
+                            <div class="show-import" style="display: none">
+                                <div class="custom-file">
+                                    <form action="{{ route('user.import') }}" method="post" enctype="multipart/form-data">
+                                        {{ csrf_field() }}
+                                        <label class="custom-file-label" for="file-upload">Choose File</label>
+                                        <input type="file" id="file-upload" class="custom-file-input" name="import_file">
+                                        <br /> <br />
+                                        <div class="footer text-right">
+                                            <button class="btn btn-primary">Import File</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="show-search" style="display: none">
+                                <form id="search">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="inputEmail4">Email</label>
+                                            <input type="text" name="email" class="form-control" id="email"
+                                                placeholder="Email">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="inputPassword4">Username</label>
+                                            <input type="text" name="name" class="form-control" id="name"
+                                                placeholder="name">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="level">Level</label>
+                                            <select id="level" class="form-control select2">
+                                                <option value="" selected>Pilih Salah Satu</option>
+                                                <option value="admin">Admin</option>
+                                                <option value="user">User</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <button class="btn btn-primary mr-1" type="submit">Submit</button>
+                                        <button class="btn btn-secondary" type="reset" id="btnReset">Reset</button>
                                     </div>
                                 </form>
                             </div>
-                        </div>
-                        <div class="card-body show-search" style="display: none">
-                            <form id="search">
-                                <div class="form-row">
-                                    <div class="form-group col-md-4">
-                                        <label for="inputEmail4">Email</label>
-                                        <input type="text" name="email" class="form-control" id="email"
-                                            placeholder="Email">
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Username</label>
-                                        <input type="text" name="name" class="form-control" id="name" placeholder="name">
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="level">Level</label>
-                                        <select id="level" class="form-control select2">
-                                            <option value="" selected>Pilih Salah Satu</option>
-                                            <option value="admin">Admin</option>
-                                            <option value="user">User</option>
-                                        </select>
-                                    </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-md">
+                                    <tbody>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Name</th>
+                                            <th class="text-right">Action</th>
+                                        </tr>
+                                        @foreach ($roles as $key => $role)
+                                            <tr>
+                                                <td>{{ ($roles->currentPage()-1) * $roles->perPage() + $key +1}}</td>
+                                                <td>{{ $role->name }}</td>
+                                                <td class="text-right">
+                                                    <a href="#" class="btn btn-sm btn-info btn-icon "><i
+                                                            class="fas fa-edit"></i>
+                                                        Edit</a>
+                                                    <a href="#" class="btn btn-sm btn-danger btn-icon "><i
+                                                            class="fas fa-times"></i>
+                                                        Delete</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                <div class="d-flex justify-content-center">
+                                    {{ $roles->links() }}
                                 </div>
-                                <div class="text-right">
-                                    <button class="btn btn-primary mr-1" type="submit">Submit</button>
-                                    <button class="btn btn-secondary" type="reset" id="btnReset">Reset</button>
-                                </div>
-                            </form>
+                            </div>
                         </div>
-                        <table class="table table-striped table-md">
-                            <tbody>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Name</th>
-                                    <th>Created At</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Irwansyah Saputra</td>
-                                    <td>2017-01-09</td>
-                                    <td>
-                                        <div class="badge badge-success">Active</div>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn btn-info"><i class="fas fa-edit"></i> Edit </a>
-                                        <a href="#" class="btn btn-icon btn-danger"><i class="fas fa-times"></i></a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+
+
+
+
                     </div>
                 </div>
             </div>
