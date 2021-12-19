@@ -18,6 +18,7 @@
                 <div class="card-header">
                     <h4>Edit Roles Form</h4>
                 </div>
+                @dump($role)
                 <div class="card-body">
                     <form action="{{ route('role.update', $role->id) }}" method="POST">
                         @csrf

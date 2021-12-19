@@ -42,5 +42,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('permission/export', ExportPermissionController::class)->name('permission.export');
     Route::post('permission/import', ImportPermissionController::class)->name('permission.import');
     //assign permission
-    Route::resource('assign', AssignPermissionController::class);
+    Route::get('assign', [AssignPermissionController::class, 'index'])->name('assign.index');
+    Route::get('assign/create', [AssignPermissionController::class, 'create'])->name('assign.create');
+    Route::get('assign/{role}/edit', [AssignPermissionController::class, 'edit'])->name('assign.edit');
+    Route::put('assign/{role}', [AssignPermissionController::class, 'update'])->name('assign.update');
+    Route::post('assign', [AssignPermissionController::class, 'store'])->name('assign.store');
 });

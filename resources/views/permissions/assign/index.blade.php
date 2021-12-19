@@ -25,9 +25,8 @@
                         <div class="card-header">
                             <h4>List Role Assigned To Permission</h4>
                             <div class="card-header-action">
-                                <a class="btn btn-icon icon-left btn-primary" href="{{ route('assign.create') }}">Create
-                                    New
-                                    dataName</a>
+                                <a class="btn btn-icon icon-left btn-primary" href="{{ route('assign.create') }}">Assign
+                                    Permission To Role</a>
                                 <a class="btn btn-info btn-primary active search">
                                     <i class="fa fa-search" aria-hidden="true"></i>
                                     Search dataName</a>
@@ -49,32 +48,28 @@
                                     </div>
                                 </form>
                             </div>
-                            {{-- <div class="table-responsive">
+                            <div class="table-responsive">
                                 <table class="table table-bordered table-md">
                                     <tbody>
                                         <tr>
                                             <th>#</th>
                                             <th>Name</th>
                                             <th>Guard Name</th>
+                                            <th>Permission</th>
                                             <th class="text-right">Action</th>
                                         </tr>
-                                        @foreach ($listData as $key => $item)
+                                        @foreach ($roles as $key => $role)
                                             <tr>
-                                                <td>{{ ($listData->firstItem() + $key }}</td>
-                                                <td>{{ $item->name }}</td>
-                                                <td>{{ $item->guard_name }}</td>
+                                                <td>{{ $roles->firstItem() + $key }}</td>
+                                                <td>{{ $role->name }}</td>
+                                                <td>{{ $role->guard_name }}</td>
+                                                <td>{{ implode(', ', $role->getPermissionNames()->toArray()) }}</td>
                                                 <td class="text-right">
                                                     <div class="d-flex justify-content-end">
-                                                        <a href="{{route('assign.edit',$item->id)}}" class="btn btn-sm btn-info btn-icon "><i
+                                                        <a href="{{ route('assign.edit', $role->id) }}"
+                                                            class="btn btn-sm btn-info btn-icon "><i
                                                                 class="fas fa-edit"></i>
                                                             Edit</a>
-                                                        <form action="{{ route('assign.destroy', $item->id) }}"
-                                                            method="POST" class="ml-2">
-                                                            <input type="hidden" name="_method" value="DELETE">
-                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                            <button class="btn btn-sm btn-danger btn-icon "><i
-                                                                    class="fas fa-times"></i> Delete </button>
-                                                        </form>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -82,9 +77,9 @@
                                     </tbody>
                                 </table>
                                 <div class="d-flex justify-content-center">
-                                    {{ $listData->withQueryString()->links() }}
+                                    {{ $roles->withQueryString()->links() }}
                                 </div>
-                            </div> --}}
+                            </div>
                         </div>
                     </div>
                 </div>

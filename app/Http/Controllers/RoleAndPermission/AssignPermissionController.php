@@ -3,7 +3,14 @@
 namespace App\Http\Controllers\RoleAndPermission;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreAssignRequest;
+use App\Http\Requests\UpdateAssignRequest;
+use App\Http\Requests\UpdatePermissionRequest;
+use Facade\Ignition\DumpRecorder\Dump;
 use Illuminate\Http\Request;
+use PHPUnit\Framework\MockObject\DuplicateMethodException;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class AssignPermissionController extends Controller
 {
@@ -15,7 +22,8 @@ class AssignPermissionController extends Controller
     public function index()
     {
         //
-        return view('permissions.assign.index');
+        $roles = Role::paginate(5);
+        return view('permissions.assign.index', compact('roles'));
     }
 
     /**
@@ -25,7 +33,9 @@ class AssignPermissionController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::all();
+        $permissions = Permission::all();
+        return view('permissions.assign.create', compact('roles', 'permissions'));
     }
 
     /**
@@ -34,9 +44,11 @@ class AssignPermissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAssignRequest $request)
     {
-        //
+        $role = Role::find($request->role);
+        $role->givePermissionTo($request->permissions);
+        return redirect()->route('assign.index')->with('success', 'Permission Assigned Successfully');
     }
 
     /**
@@ -56,9 +68,12 @@ class AssignPermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Role $role)
     {
         //
+        $roles = Role::all();
+        $permissions = Permission::all();
+        return view('permissions.assign.edit', compact('role', 'roles', 'permissions'));
     }
 
     /**
@@ -68,9 +83,10 @@ class AssignPermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateAssignRequest $request, Role $role)
     {
-        //
+        $role->syncPermissions($request->permissions);
+        return redirect()->route('assign.index')->with('success', 'Permission Assigned Successfully');
     }
 
     /**
