@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\RoleAndPermission;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePermissionRequest;
+use App\Http\Requests\UpdatePermissionRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
@@ -36,6 +38,7 @@ class PermissionController extends Controller
     public function create()
     {
         //
+        return view('permissions.permissions.create');
     }
 
     /**
@@ -44,9 +47,14 @@ class PermissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePermissionRequest $request)
     {
         //
+        Permission::create([
+            'name' => $request->name,
+            'guard_name' => $request->guard_name ?? 'web',
+        ]);
+        return redirect()->route('permission.index')->with('success', 'Permission Created Successfully');
     }
 
     /**
@@ -69,6 +77,7 @@ class PermissionController extends Controller
     public function edit(Permission $permission)
     {
         //
+        return view('permissions.permissions.edit', compact('permission'));
     }
 
     /**
@@ -78,9 +87,11 @@ class PermissionController extends Controller
      * @param  Spatie\Permission\Models\Permission $permission
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Permission $permission)
+    public function update(UpdatePermissionRequest $request, Permission $permission)
     {
         //
+        $permission->update($request->validated());
+        return redirect()->route('permission.index')->with('success', 'Permission Updated Successfully');
     }
 
     /**
@@ -92,5 +103,7 @@ class PermissionController extends Controller
     public function destroy(Permission $permission)
     {
         //
+        $permission->delete();
+        return redirect()->route('permission.index')->with('success', 'Permission Deleted Successfully');
     }
 }
