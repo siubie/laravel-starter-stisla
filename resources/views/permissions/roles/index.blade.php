@@ -73,12 +73,14 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Name</th>
+                                            <th>Guard Name</th>
                                             <th class="text-right">Action</th>
                                         </tr>
                                         @foreach ($roles as $key => $role)
                                             <tr>
                                                 <td>{{ ($roles->currentPage() - 1) * $roles->perPage() + $key + 1 }}</td>
                                                 <td>{{ $role->name }}</td>
+                                                <td>{{ $role->guard_name }}</td>
                                                 <td class="text-right">
                                                     <div class="d-flex justify-content-end">
                                                         <a href="#" class="btn btn-sm btn-info btn-icon "><i
