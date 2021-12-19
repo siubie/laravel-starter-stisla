@@ -41,7 +41,7 @@
                         <div class="card-body">
                             <div class="show-import" style="display: none">
                                 <div class="custom-file">
-                                    <form action="{{ route('user.import') }}" method="post" enctype="multipart/form-data">
+                                    <form action="{{ route('role.import') }}" method="post" enctype="multipart/form-data">
                                         {{ csrf_field() }}
                                         <label class="custom-file-label" for="file-upload">Choose File</label>
                                         <input type="file" id="file-upload" class="custom-file-input" name="import_file">
@@ -83,13 +83,15 @@
                                                 <td>{{ $role->guard_name }}</td>
                                                 <td class="text-right">
                                                     <div class="d-flex justify-content-end">
-                                                        <a href="#" class="btn btn-sm btn-info btn-icon "><i
+                                                        <a href="{{ route('role.edit', $role->id) }}"
+                                                            class="btn btn-sm btn-info btn-icon "><i
                                                                 class="fas fa-edit"></i>
                                                             Edit</a>
                                                         <form action="{{ route('role.destroy', $role->id) }}"
                                                             method="POST" class="ml-2">
                                                             <input type="hidden" name="_method" value="DELETE">
-                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                            <input type="hidden" name="_token"
+                                                                value="{{ csrf_token() }}">
                                                             <button class="btn btn-sm btn-danger btn-icon "><i
                                                                     class="fas fa-times"></i> Delete </button>
                                                         </form>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\RoleAndPermission;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRoleRequest;
+use App\Http\Requests\UpdateRoleRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
@@ -46,7 +47,7 @@ class RoleController extends Controller
     {
         Role::create([
             'name' => $request->name,
-            'guard_name' => $request->guard_name??'web',
+            'guard_name' => $request->guard_name ?? 'web',
         ]);
         return redirect()->route('role.index')->with('success', 'Role Created Successfully');
     }
@@ -68,9 +69,10 @@ class RoleController extends Controller
      * @param  \App\Models\Roles  $roles
      * @return \Illuminate\Http\Response
      */
-    public function edit(Roles $roles)
+    public function edit(Role $role)
     {
         //
+        return view('permissions.roles.edit', compact('role'));
     }
 
     /**
@@ -80,9 +82,11 @@ class RoleController extends Controller
      * @param  \App\Models\Roles  $roles
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Roles $roles)
+    public function update(UpdateRoleRequest $request, Role $role)
     {
         //
+        $role->update($request->validated());
+        return redirect()->route('role.index')->with('success', 'Role Updated Successfully');
     }
 
     /**
