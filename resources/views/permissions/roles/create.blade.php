@@ -25,7 +25,17 @@
                                 name="name" placeholder="Role Name">
                             @error('name')
                                 <div class="invalid-feedback">
-                                    {{ message }}
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Guard Name</label>
+                            <input type="text" class="form-control @error('guard_name') is-invalid @enderror"
+                                id="guard_name" name="guard_name" placeholder="Web">
+                            @error('guard_name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
                                 </div>
                             @enderror
                         </div>

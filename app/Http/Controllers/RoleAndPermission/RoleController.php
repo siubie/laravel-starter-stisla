@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\RoleAndPermission;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreRoleRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
@@ -40,18 +42,22 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRoleRequest $request)
     {
-        //
+        Role::create([
+            'name' => $request->name,
+            'guard_name' => $request->guard_name??'web',
+        ]);
+        return redirect()->route('role.index')->with('success', 'Role Created Successfully');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Roles  $roles
+     * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function show(Roles $roles)
+    public function show(Role $role)
     {
         //
     }
@@ -85,8 +91,10 @@ class RoleController extends Controller
      * @param  \App\Models\Roles  $roles
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Roles $roles)
+    public function destroy(Role $role)
     {
         //
+        $role->delete();
+        return redirect()->route('role.index')->with('success', 'Role Deleted Successfully');
     }
 }

@@ -80,12 +80,18 @@
                                                 <td>{{ ($roles->currentPage() - 1) * $roles->perPage() + $key + 1 }}</td>
                                                 <td>{{ $role->name }}</td>
                                                 <td class="text-right">
-                                                    <a href="#" class="btn btn-sm btn-info btn-icon "><i
-                                                            class="fas fa-edit"></i>
-                                                        Edit</a>
-                                                    <a href="#" class="btn btn-sm btn-danger btn-icon "><i
-                                                            class="fas fa-times"></i>
-                                                        Delete</a>
+                                                    <div class="d-flex justify-content-end">
+                                                        <a href="#" class="btn btn-sm btn-info btn-icon "><i
+                                                                class="fas fa-edit"></i>
+                                                            Edit</a>
+                                                        <form action="{{ route('role.destroy', $role->id) }}"
+                                                            method="POST" class="ml-2">
+                                                            <input type="hidden" name="_method" value="DELETE">
+                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                            <button class="btn btn-sm btn-danger btn-icon "><i
+                                                                    class="fas fa-times"></i> Delete </button>
+                                                        </form>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach
