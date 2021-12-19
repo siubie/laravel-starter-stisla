@@ -26,7 +26,7 @@
             <ul class="dropdown-menu">
                 <li><a class="nav-link " href="{{ route('role.index') }}">Role</a></li>
                 <li><a class="nav-link " href="{{ route('permission.index') }}">Permission</a></li>
-                <li><a class="nav-link " href="#">Assign Role</a></li>
+                <li><a class="nav-link " href="{{ route('assign.index') }}">Assign Permission</a></li>
             </ul>
         </li>
     </ul>

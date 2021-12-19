@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RoleAndPermission\AssignPermissionController;
 use App\Http\Controllers\RoleAndPermission\ExportPermissionController;
 use App\Http\Controllers\RoleAndPermission\ExportRoleController;
 use App\Http\Controllers\RoleAndPermission\ImportPermissionController;
@@ -40,4 +41,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('permission', PermissionController::class);
     Route::get('permission/export', ExportPermissionController::class)->name('permission.export');
     Route::post('permission/import', ImportPermissionController::class)->name('permission.import');
+    //assign permission
+    Route::resource('assign', AssignPermissionController::class);
 });

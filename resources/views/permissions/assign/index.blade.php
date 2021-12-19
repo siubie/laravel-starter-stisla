@@ -4,7 +4,7 @@
     <!-- Main Content -->
     <section class="section">
         <div class="section-header">
-            <h1>Role and Permission</h1>
+            <h1>Roles and Permission</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
                 <div class="breadcrumb-item"><a href="#">Components</a></div>
@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="section-body">
-            <h2 class="section-title">Role Management</h2>
+            <h2 class="section-title">Assign Role and Permission</h2>
 
             <div class="row">
                 <div class="col-12">
@@ -23,37 +23,19 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h4>Roles List</h4>
+                            <h4>List Role Assigned To Permission</h4>
                             <div class="card-header-action">
-                                <a class="btn btn-icon icon-left btn-primary" href="{{ route('role.create') }}">Create New
-                                    Role</a>
-                                <a class="btn btn-info btn-primary active import">
-                                    <i class="fa fa-download" aria-hidden="true"></i>
-                                    Import Role</a>
-                                <a class="btn btn-info btn-primary active" href="{{ route('role.export') }}">
-                                    <i class="fa fa-upload" aria-hidden="true"></i>
-                                    Export Role</a>
+                                <a class="btn btn-icon icon-left btn-primary" href="{{ route('assign.create') }}">Create
+                                    New
+                                    dataName</a>
                                 <a class="btn btn-info btn-primary active search">
                                     <i class="fa fa-search" aria-hidden="true"></i>
-                                    Search Role</a>
+                                    Search dataName</a>
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="show-import" style="display: none">
-                                <div class="custom-file">
-                                    <form action="{{ route('role.import') }}" method="post" enctype="multipart/form-data">
-                                        {{ csrf_field() }}
-                                        <label class="custom-file-label" for="file-upload">Choose File</label>
-                                        <input type="file" id="file-upload" class="custom-file-input" name="import_file">
-                                        <br /> <br />
-                                        <div class="footer text-right">
-                                            <button class="btn btn-primary">Import File</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
                             <div class="show-search mb-3" style="display: none">
-                                <form id="search" method="GET" action="{{ route('role.index') }}">
+                                <form id="search" method="GET" action="{{ route('assign.index') }}">
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="role">Role</label>
@@ -63,11 +45,11 @@
                                     </div>
                                     <div class="text-right">
                                         <button class="btn btn-primary mr-1" type="submit">Submit</button>
-                                        <a class="btn btn-secondary" href="{{ route('role.index') }}">Reset</a>
+                                        <a class="btn btn-secondary" href="{{ route('assign.index') }}">Reset</a>
                                     </div>
                                 </form>
                             </div>
-                            <div class="table-responsive">
+                            {{-- <div class="table-responsive">
                                 <table class="table table-bordered table-md">
                                     <tbody>
                                         <tr>
@@ -76,22 +58,20 @@
                                             <th>Guard Name</th>
                                             <th class="text-right">Action</th>
                                         </tr>
-                                        @foreach ($roles as $key => $role)
+                                        @foreach ($listData as $key => $item)
                                             <tr>
-                                                <td>{{ $roles->firstItem() + $key }}</td>
-                                                <td>{{ $role->name }}</td>
-                                                <td>{{ $role->guard_name }}</td>
+                                                <td>{{ ($listData->firstItem() + $key }}</td>
+                                                <td>{{ $item->name }}</td>
+                                                <td>{{ $item->guard_name }}</td>
                                                 <td class="text-right">
                                                     <div class="d-flex justify-content-end">
-                                                        <a href="{{ route('role.edit', $role->id) }}"
-                                                            class="btn btn-sm btn-info btn-icon "><i
+                                                        <a href="{{route('assign.edit',$item->id)}}" class="btn btn-sm btn-info btn-icon "><i
                                                                 class="fas fa-edit"></i>
                                                             Edit</a>
-                                                        <form action="{{ route('role.destroy', $role->id) }}"
+                                                        <form action="{{ route('assign.destroy', $item->id) }}"
                                                             method="POST" class="ml-2">
                                                             <input type="hidden" name="_method" value="DELETE">
-                                                            <input type="hidden" name="_token"
-                                                                value="{{ csrf_token() }}">
+                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                             <button class="btn btn-sm btn-danger btn-icon "><i
                                                                     class="fas fa-times"></i> Delete </button>
                                                         </form>
@@ -102,14 +82,10 @@
                                     </tbody>
                                 </table>
                                 <div class="d-flex justify-content-center">
-                                    {{ $roles->withQueryString()->links() }}
+                                    {{ $listData->withQueryString()->links() }}
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
-
-
-
-
                     </div>
                 </div>
             </div>

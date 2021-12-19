@@ -22,7 +22,7 @@ class RoleController extends Controller
             ->when($request->input('name'), function ($query, $name) {
                 return $query->where('name', 'like', '%' . $name . '%');
             })
-            ->paginate(10);
+            ->paginate(2);
         return view('permissions.roles.index', compact('roles'));
     }
 
