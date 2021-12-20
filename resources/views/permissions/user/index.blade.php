@@ -28,9 +28,6 @@
                                 <a class="btn btn-icon icon-left btn-primary"
                                     href="{{ route('assign.user.create') }}">Assign
                                     User To Role</a>
-                                <a class="btn btn-info btn-primary active search">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                    Search dataName</a>
                             </div>
                         </div>
                         <div class="card-body">
