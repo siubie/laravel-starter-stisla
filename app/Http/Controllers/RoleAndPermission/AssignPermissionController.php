@@ -4,6 +4,7 @@ namespace App\Http\Controllers\RoleAndPermission;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAssignRequest;
+use App\Http\Requests\StoreUserToRoleRequest;
 use App\Http\Requests\UpdateAssignRequest;
 use App\Http\Requests\UpdatePermissionRequest;
 use Facade\Ignition\DumpRecorder\Dump;
@@ -44,7 +45,7 @@ class AssignPermissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreAssignRequest $request)
+    public function store(StoreUserToRoleRequest $request)
     {
         $role = Role::find($request->role);
         $role->givePermissionTo($request->permissions);

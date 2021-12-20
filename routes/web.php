@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\RoleAndPermission\AssignPermissionController;
+use App\Http\Controllers\RoleAndPermission\AssignUserToRoleController;
 use App\Http\Controllers\RoleAndPermission\ExportPermissionController;
 use App\Http\Controllers\RoleAndPermission\ExportRoleController;
 use App\Http\Controllers\RoleAndPermission\ImportPermissionController;
@@ -47,4 +48,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('assign/{role}/edit', [AssignPermissionController::class, 'edit'])->name('assign.edit');
     Route::put('assign/{role}', [AssignPermissionController::class, 'update'])->name('assign.update');
     Route::post('assign', [AssignPermissionController::class, 'store'])->name('assign.store');
+
+    //assign user to role
+    Route::get('assign-user', [AssignUserToRoleController::class, 'index'])->name('assign.user.index');
+    Route::get('assign-user/create', [AssignUserToRoleController::class, 'create'])->name('assign.user.create');
+    Route::post('assign-user', [AssignUserToRoleController::class, 'store'])->name('assign.user.store');
+    Route::get('assing-user/{user}/edit', [AssignUserToRoleController::class, 'edit'])->name('assign.user.edit');
+    Route::put('assign-user/{user}', [AssignUserToRoleController::class, 'update'])->name('assign.user.update');
 });
