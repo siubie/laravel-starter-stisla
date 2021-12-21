@@ -30,24 +30,31 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', function () {
         return view('home', ['users' => User::get(),]);
     });
+
     Route::resource('user', UserController::class);
     Route::post('import', [UserController::class, 'import'])->name('user.import');
     Route::get('export', [UserController::class, 'export'])->name('user.export');
     Route::post('user/filter', [UserController::class, 'filter'])->name('user.filter');
+
     //role
     Route::resource('role', RoleController::class);
     Route::get('role/export', ExportRoleController::class)->name('role.export');
     Route::post('role/import', ImportRoleController::class)->name('role.import');
+
     //permission
     Route::resource('permission', PermissionController::class);
     Route::get('permission/export', ExportPermissionController::class)->name('permission.export');
     Route::post('permission/import', ImportPermissionController::class)->name('permission.import');
+
     //assign permission
+    // Route::group(['middleware' => ['can:publish articles']], function () {
+    //
     Route::get('assign', [AssignPermissionController::class, 'index'])->name('assign.index');
     Route::get('assign/create', [AssignPermissionController::class, 'create'])->name('assign.create');
     Route::get('assign/{role}/edit', [AssignPermissionController::class, 'edit'])->name('assign.edit');
     Route::put('assign/{role}', [AssignPermissionController::class, 'update'])->name('assign.update');
     Route::post('assign', [AssignPermissionController::class, 'store'])->name('assign.store');
+    // });
 
     //assign user to role
     Route::get('assign-user', [AssignUserToRoleController::class, 'index'])->name('assign.user.index');
