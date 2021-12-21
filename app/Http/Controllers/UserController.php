@@ -11,7 +11,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\UsersImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Yajra\DataTables\Facades\DataTables;
+
 
 class UserController extends Controller
 {
@@ -20,15 +20,17 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //index -> menampilkan tabel data
         // mengambil data
-        $user = User::all();
-
-        // menampilkan data
-        return view('users.index')
-            ->with('users', $user);
+        $users = DB::table('users')
+        ->when($request->input('name'), function ($query, $name) {
+            return $query->where('name', 'like', '%' . $name . '%');
+        })
+        ->paginate(10);
+    return view('users.index', compact('users'));
+        
     }
 
     /**
@@ -108,9 +110,7 @@ class UserController extends Controller
     {
         //delete data
         $user->delete();
-        return response()->json([
-            'message' => 'Data penerbangan berhasil dihapus!'
-        ]);
+        return redirect()->route('user.index')->with('success', 'User Deleted Successfully');
     }
 
     public function export()
@@ -133,28 +133,5 @@ class UserController extends Controller
         return redirect()->route('user.index');
     }
 
-    public function filter(Request $request)
-    {
-        // 1. ambil data user
-        $users = DB::table('users')
-            ->when($request->input('name'), function ($query, $data) {
-                return $query->where('name', 'like', '%' . $data . '%');
-            })
-            ->when($request->input('email'), function ($query, $data) {
-                return $query->where('email', 'like', '%' . $data . '%');
-            })
-            ->selectRaw("
-            id,
-            name,
-            email,
-            DATE_FORMAT(created_at,'%d-%m-%Y') as date
-            ")
-            ->get();
-
-        // 2. ubah data user berupa datatable
-        $datatable = DataTables::of($users)->make(true);
-
-        // 3. return datatable
-        return $datatable;
-    }
+    
 }

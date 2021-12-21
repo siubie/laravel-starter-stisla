@@ -30,12 +30,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', function () {
         return view('home', ['users' => User::get(),]);
     });
-
+    //user list
     Route::resource('user', UserController::class);
     Route::post('import', [UserController::class, 'import'])->name('user.import');
     Route::get('export', [UserController::class, 'export'])->name('user.export');
-    Route::post('user/filter', [UserController::class, 'filter'])->name('user.filter');
-
+    
     //role
     Route::resource('role', RoleController::class);
     Route::get('role/export', ExportRoleController::class)->name('role.export');
