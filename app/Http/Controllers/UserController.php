@@ -25,12 +25,11 @@ class UserController extends Controller
         //index -> menampilkan tabel data
         // mengambil data
         $users = DB::table('users')
-        ->when($request->input('name'), function ($query, $name) {
-            return $query->where('name', 'like', '%' . $name . '%');
-        })
-        ->paginate(10);
-    return view('users.index', compact('users'));
-        
+            ->when($request->input('name'), function ($query, $name) {
+                return $query->where('name', 'like', '%' . $name . '%');
+            })
+            ->paginate(10);
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -132,6 +131,4 @@ class UserController extends Controller
         }
         return redirect()->route('user.index');
     }
-
-    
 }
