@@ -77,6 +77,7 @@
                                             <th>Parent</th>
                                             <th>Name</th>
                                             <th>Url</th>
+                                            <th>Permission</th>
                                             <th class="text-right">Action</th>
                                         </tr>
                                         @foreach ($menuItems as $key => $menuItem)

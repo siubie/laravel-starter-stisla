@@ -22,7 +22,8 @@ class AssignUserToRoleController extends Controller
     public function index()
     {
         //
-        $users = User::has('roles')->paginate(5);
+        // $users = User::with('roles')->paginate(5);
+        $users = User::with('roles')->paginate(5);
         return view('permissions.user.index', compact('users'));
     }
 

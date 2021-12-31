@@ -25,7 +25,9 @@ class StoreMenuGroupRequest extends FormRequest
     {
         return [
             //
-            'name' => 'required|unique:menu_groups'
+            'name' => 'required|unique:menu_groups',
+            'permission_name' => 'required',
+            'icon' => 'required',
         ];
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateMenuGroupRequest;
 use App\Models\MenuGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Permission;
 
 class MenuGroupController extends Controller
 {
@@ -35,7 +36,8 @@ class MenuGroupController extends Controller
     public function create()
     {
         //
-        return view('menu.menu-group.create');
+        $permissions = Permission::all();
+        return view('menu.menu-group.create', compact('permissions'));
     }
 
     /**

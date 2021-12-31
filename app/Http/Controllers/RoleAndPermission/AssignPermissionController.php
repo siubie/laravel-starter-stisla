@@ -32,7 +32,7 @@ class AssignPermissionController extends Controller
     public function index()
     {
         //
-        $roles = Role::paginate(10);
+        $roles = Role::with('permissions')->paginate(10);
         return view('permissions.assign.index', compact('roles'));
     }
 

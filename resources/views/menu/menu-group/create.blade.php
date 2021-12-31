@@ -31,6 +31,30 @@
                                 </div>
                             @enderror
                         </div>
+                        <div class="form-group">
+                            <label for="name">Icon Name</label>
+                            <input type="text" class="form-control @error('icon') is-invalid @enderror" id="icon"
+                                name="icon" placeholder="Font Aweseome Icon Name" value="{{ old('icon') }}">
+                            @error('icon')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label>Permission Name</label>
+                            <select class="form-control select2" name="permission_name">
+                                <option value="">Choose Role</option>
+                                @foreach ($permissions as $permission)
+                                    <option value="{{ $permission->name }}">{{ $permission->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('permission_name')
+                                {{ $message }}
+                            @enderror
+                        </div>
+
                 </div>
                 <div class="card-footer text-right">
                     <button class="btn btn-primary">Submit</button>
@@ -41,3 +65,11 @@
         </div>
     </section>
 @endsection
+
+@push('customScript')
+    <script src="/assets/js/select2.min.js"></script>
+@endpush
+
+@push('customStyle')
+    <link rel="stylesheet" href="/assets/css/select2.min.css">
+@endpush
