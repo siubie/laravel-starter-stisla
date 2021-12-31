@@ -25,9 +25,45 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'user-management']);
         Permission::create(['name' => 'role-and-permission']);
         Permission::create(['name' => 'menu-management']);
+        //user
+        Permission::create(['name' => 'user.index']);
+        Permission::create(['name' => 'user.create']);
+        Permission::create(['name' => 'user.edit']);
+        Permission::create(['name' => 'user.delete']);
+        Permission::create(['name' => 'user.import']);
+        Permission::create(['name' => 'user.export']);
+
+        //role
+        Permission::create(['name' => 'role.index']);
+        Permission::create(['name' => 'role.create']);
+        Permission::create(['name' => 'role.edit']);
+        Permission::create(['name' => 'role.delete']);
+        Permission::create(['name' => 'role.import']);
+        Permission::create(['name' => 'role.export']);
+
+        //permission
+        Permission::create(['name' => 'permission.index']);
+        Permission::create(['name' => 'permission.create']);
+        Permission::create(['name' => 'permission.edit']);
+        Permission::create(['name' => 'permission.delete']);
+        Permission::create(['name' => 'permission.import']);
+        Permission::create(['name' => 'permission.export']);
+
+        //assignpermission
+        Permission::create(['name' => 'assign.index']);
+        Permission::create(['name' => 'assign.create']);
+        Permission::create(['name' => 'assign.edit']);
+        Permission::create(['name' => 'assign.delete']);
+
+        //assingusertorole
+        Permission::create(['name' => 'assign.user.index']);
+        Permission::create(['name' => 'assign.user.create']);
+        Permission::create(['name' => 'assign.user.edit']);
+
 
         // create roles 
-        Role::create(['name' => 'user']);
+        $roleUser = Role::create(['name' => 'user']);
+        $roleUser->givePermissionTo('dashboard');
 
         // create Super Admin
         $role = Role::create(['name' => 'super-admin']);

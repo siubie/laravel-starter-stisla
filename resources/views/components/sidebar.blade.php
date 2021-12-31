@@ -13,8 +13,11 @@
                         <span>{{ $item->name }}</span></a>
                     <ul class="dropdown-menu">
                         @foreach ($item->menuItems as $menuItem)
-                            <li><a class="nav-link " href="{{ url($menuItem->route) }}">{{ $menuItem->name }}</a>
-                            </li>
+                            @can($menuItem->permission_name)
+                                <li>
+                                    <a class="nav-link " href="{{ url($menuItem->route) }}">{{ $menuItem->name }}</a>
+                                </li>
+                            @endcan
                         @endforeach
                     </ul>
                 </li>
