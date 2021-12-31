@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMenuGroupsTable extends Migration
+class CreateMenuItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateMenuGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('menu_groups', function (Blueprint $table) {
+        Schema::create('menu_items', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('permission_name');
-            $table->string('icon');
+            $table->string('route')->unique();
+            $table->unsignedBigInteger('menu_group_id');
+            $table->foreign('menu_group_id')->references('id')->on('menu_groups')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateMenuGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menu_groups');
+        Schema::dropIfExists('menu_items');
     }
 }

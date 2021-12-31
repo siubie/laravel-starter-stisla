@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -20,22 +21,22 @@ class RoleAndPermissionSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         // create permissions
-        Permission::create(['name' => 'edit articles']);
-        Permission::create(['name' => 'delete articles']);
-        Permission::create(['name' => 'publish articles']);
-        Permission::create(['name' => 'unpublish articles']);
+        Permission::create(['name' => 'dashboard']);
+        Permission::create(['name' => 'user-management']);
+        Permission::create(['name' => 'role-and-permission']);
+        Permission::create(['name' => 'menu-management']);
 
-        // create roles and assign created permissions
+        // create roles 
+        Role::create(['name' => 'user']);
 
-        // this can be done as separate statements
-        $role = Role::create(['name' => 'writer']);
-        $role->givePermissionTo('edit articles');
-
-        // or may be done by chaining
-        $role = Role::create(['name' => 'moderator'])
-            ->givePermissionTo(['publish articles', 'unpublish articles']);
-
+        // create Super Admin
         $role = Role::create(['name' => 'super-admin']);
         $role->givePermissionTo(Permission::all());
+
+        //assign user id 1 ke super admin
+        $user = User::find(1);
+        $user->assignRole('super-admin');
+        $user = User::find(2);
+        $user->assignRole('user');
     }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\Menu\MenuGroupController;
+use App\Http\Controllers\Menu\MenuItemController;
 use App\Http\Controllers\RoleAndPermission\AssignPermissionController;
 use App\Http\Controllers\RoleAndPermission\AssignUserToRoleController;
 use App\Http\Controllers\RoleAndPermission\ExportPermissionController;
@@ -43,6 +44,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::prefix('menu-management')->group(function () {
         Route::resource('menu-group', MenuGroupController::class);
+        Route::resource('menu-item', MenuItemController::class);
     });
     Route::group(['prefix' => 'role-and-permission'], function () {
         //role

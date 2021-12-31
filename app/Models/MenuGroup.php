@@ -8,5 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class MenuGroup extends Model
 {
     use HasFactory;
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'icon', 'permisison_name'];
+
+    public function menuItems()
+    {
+        return $this->hasMany(MenuItem::class);
+    }
 }

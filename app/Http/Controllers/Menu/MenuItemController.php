@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Menu;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreMenuGroupRequest;
-use App\Http\Requests\UpdateMenuGroupRequest;
 use App\Models\MenuGroup;
+use App\Models\MenuItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
 
-class MenuGroupController extends Controller
+class MenuItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,12 +19,17 @@ class MenuGroupController extends Controller
     public function index(Request $request)
     {
         //
-        $menuGroups = DB::table('menu_groups')
+        $menuItems = DB::table('menu_items')
+            ->select('menu_items.*', 'menu_groups.name as menu_group_name')
+            ->join('menu_groups', 'menu_items.menu_group_id', '=', 'menu_groups.id')
             ->when($request->input('name'), function ($query, $name) {
-                return $query->where('name', 'like', '%' . $name . '%');
+                return $query->where('menu_items.name', 'like', '%' . $name . '%');
+            })
+            ->when($request->input('url'), function ($query, $url) {
+                return $query->where('url', 'like', '%' . $url . '%');
             })
             ->paginate(10);
-        return view('menu.menu-group.index', compact('menuGroups'));
+        return view('menu.menu-item.index', compact('menuItems'));
     }
 
     /**
@@ -35,7 +40,9 @@ class MenuGroupController extends Controller
     public function create()
     {
         //
-        return view('menu.menu-group.create');
+        $routeCollection = Route::getRoutes();
+        $menuGroups = MenuGroup::all();
+        return view('menu.menu-item.create', compact('routeCollection', 'menuGroups'));
     }
 
     /**
@@ -44,20 +51,18 @@ class MenuGroupController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMenuGroupRequest $request)
+    public function store(Request $request)
     {
         //
-        MenuGroup::create($request->validated());
-        return redirect()->route('menu-group.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\MenuGroup  $menuGroup
+     * @param  \App\Models\MenuItem  $menuItem
      * @return \Illuminate\Http\Response
      */
-    public function show(MenuGroup $menuGroup)
+    public function show(MenuItem $menuItem)
     {
         //
     }
@@ -65,39 +70,34 @@ class MenuGroupController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\MenuGroup  $menuGroup
+     * @param  \App\Models\MenuItem  $menuItem
      * @return \Illuminate\Http\Response
      */
-    public function edit(MenuGroup $menuGroup)
+    public function edit(MenuItem $menuItem)
     {
         //
-        return view('menu.menu-group.edit', compact('menuGroup'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\MenuGroup  $menuGroup
+     * @param  \App\Models\MenuItem  $menuItem
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMenuGroupRequest $request, MenuGroup $menuGroup)
+    public function update(Request $request, MenuItem $menuItem)
     {
         //
-        $menuGroup->update($request->validated());
-        return redirect()->route('menu-group.index')->with('success', 'Data berhasil diubah');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\MenuGroup  $menuGroup
+     * @param  \App\Models\MenuItem  $menuItem
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MenuGroup $menuGroup)
+    public function destroy(MenuItem $menuItem)
     {
         //
-        $menuGroup->delete();
-        return redirect()->route('menu-group.index')->with('success', 'Data berhasil dihapus');
     }
 }

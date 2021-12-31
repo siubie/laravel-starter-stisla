@@ -34,7 +34,7 @@
                 <span>Menu Management</span></a>
             <ul class="dropdown-menu">
                 <li><a class="nav-link " href="{{ route('menu-group.index') }}">Menu Group</a></li>
-                <li><a class="nav-link " href="{{ route('role.index') }}">Menu Item</a></li>
+                <li><a class="nav-link " href="{{ route('menu-item.index') }}">Menu Item</a></li>
             </ul>
         </li>
     </ul>

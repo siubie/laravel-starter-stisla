@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="section-body">
-            <h2 class="section-title">Menu Group Management</h2>
+            <h2 class="section-title">Menu Item Management</h2>
 
             <div class="row">
                 <div class="col-12">
@@ -23,24 +23,26 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h4>Menu Group List</h4>
+                            <h4>Menu Item List</h4>
                             <div class="card-header-action">
                                 <a class="btn btn-icon icon-left btn-primary"
-                                    href="{{ route('menu-group.create') }}">Create New Menu Group</a>
+                                    href="{{ route('menu-item.create') }}">Create New
+                                    Menu Item</a>
                                 {{-- <a class="btn btn-info btn-primary active import">
                                     <i class="fa fa-download" aria-hidden="true"></i>
-                                    Import dataName</a> --}}
-                                {{-- <a class="btn btn-info btn-primary active" href="{{ route('menu-group.export') }}">
+                                    Import Menu Item</a>
+                                <a class="btn btn-info btn-primary active" href="{{ route('menu-item.export') }}">
                                     <i class="fa fa-upload" aria-hidden="true"></i>
-                                    Export dataName</a> --}}
-                                <a class="btn btn-info btn-primary active search"> <i class="fa fa-search"
-                                        aria-hidden="true"></i> Search Menu Group</a>
+                                    Export Menu Item</a> --}}
+                                <a class="btn btn-info btn-primary active search">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                    Search Menu Item</a>
                             </div>
                         </div>
                         <div class="card-body">
                             {{-- <div class="show-import" style="display: none">
                                 <div class="custom-file">
-                                    <form action="{{ route('menu-group.import') }}" method="post"
+                                    <form action="{{ route('menu-item.import') }}" method="post"
                                         enctype="multipart/form-data">
                                         {{ csrf_field() }}
                                         <label class="custom-file-label" for="file-upload">Choose File</label>
@@ -53,17 +55,17 @@
                                 </div>
                             </div> --}}
                             <div class="show-search mb-3" style="display: none">
-                                <form id="search" method="GET" action="{{ route('menu-group.index') }}">
+                                <form id="search" method="GET" action="{{ route('menu-item.index') }}">
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
-                                            <label for="role">Group</label>
+                                            <label for="role">Menu Item</label>
                                             <input type="text" name="name" class="form-control" id="name"
-                                                placeholder="Group Name">
+                                                placeholder="Menu Item Name">
                                         </div>
                                     </div>
                                     <div class="text-right">
                                         <button class="btn btn-primary mr-1" type="submit">Submit</button>
-                                        <a class="btn btn-secondary" href="{{ route('menu-group.index') }}">Reset</a>
+                                        <a class="btn btn-secondary" href="{{ route('menu-item.index') }}">Reset</a>
                                     </div>
                                 </form>
                             </div>
@@ -72,20 +74,24 @@
                                     <tbody>
                                         <tr>
                                             <th>#</th>
+                                            <th>Parent</th>
                                             <th>Name</th>
+                                            <th>Url</th>
                                             <th class="text-right">Action</th>
                                         </tr>
-                                        @foreach ($menuGroups as $key => $item)
+                                        @foreach ($menuItems as $key => $menuItem)
                                             <tr>
-                                                <td>{{ $menuGroups->firstItem() + $key }}</td>
-                                                <td>{{ $item->name }}</td>
+                                                <td>{{ $menuItems->firstItem() + $key }}</td>
+                                                <td>{{ $menuItem->menu_group_name }}</td>
+                                                <td>{{ $menuItem->name }}</td>
+                                                <td>{{ $menuItem->url }}</td>
                                                 <td class="text-right">
                                                     <div class="d-flex justify-content-end">
-                                                        <a href="{{ route('menu-group.edit', $item->id) }}"
+                                                        <a href="{{ route('menu-item.edit', $menuItem->id) }}"
                                                             class="btn btn-sm btn-info btn-icon "><i
                                                                 class="fas fa-edit"></i>
                                                             Edit</a>
-                                                        <form action="{{ route('menu-group.destroy', $item->id) }}"
+                                                        <form action="{{ route('menu-item.destroy', $menuItem->id) }}"
                                                             method="POST" class="ml-2">
                                                             <input type="hidden" name="_method" value="DELETE">
                                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -99,7 +105,7 @@
                                     </tbody>
                                 </table>
                                 <div class="d-flex justify-content-center">
-                                    {{ $menuGroups->withQueryString()->links() }}
+                                    {{ $menuItems->withQueryString()->links() }}
                                 </div>
                             </div>
                         </div>
@@ -130,7 +136,9 @@
             });
         });
     </script>
+    <script src="/assets/js/select2.min.js"></script>
 @endpush
 
 @push('customStyle')
+    <link rel="stylesheet" href="/assets/css/select2.min.css">
 @endpush

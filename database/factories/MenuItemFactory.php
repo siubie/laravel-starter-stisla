@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\MenuGroup;
+use App\Models\MenuItem;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class MenuGroupFactory extends Factory
+class MenuItemFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = MenuGroup::class;
+    protected $model = MenuItem::class;
 
     /**
      * Define the model's default state.
@@ -23,8 +23,9 @@ class MenuGroupFactory extends Factory
     {
         return [
             //
-            'name' => $this->faker->word(2),
-            'icon' => $this->faker->randomElement(['fas fa-home', 'fas fa-user', 'fas fa-cog']),
+            'name' => $this->faker->sentence(2),
+            'url' => $this->faker->url,
+            'menu_group_id' => $this->faker->numberBetween(1, 5),
         ];
     }
 }
