@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DemoController;
+use App\Http\Controllers\Menu\MenuGroupController;
 use App\Http\Controllers\RoleAndPermission\AssignPermissionController;
 use App\Http\Controllers\RoleAndPermission\AssignUserToRoleController;
 use App\Http\Controllers\RoleAndPermission\ExportPermissionController;
@@ -32,13 +33,18 @@ Route::group(['middleware' => ['auth']], function () {
         return view('home', ['users' => User::get(),]);
     });
     //user list
-    Route::resource('user', UserController::class);
-    Route::post('import', [UserController::class, 'import'])->name('user.import');
-    Route::get('export', [UserController::class, 'export'])->name('user.export');
-    Route::get('demo', DemoController::class)->name('user.demo');
 
-    Route::group(['middleware' => ['can:manage-roles-and-permission']], function () {
+    Route::prefix('user-management')->group(function () {
+        Route::resource('user', UserController::class);
+        Route::post('import', [UserController::class, 'import'])->name('user.import');
+        Route::get('export', [UserController::class, 'export'])->name('user.export');
+        Route::get('demo', DemoController::class)->name('user.demo');
+    });
 
+    Route::prefix('menu-management')->group(function () {
+        Route::resource('menu-group', MenuGroupController::class);
+    });
+    Route::group(['prefix' => 'role-and-permission'], function () {
         //role
         Route::resource('role', RoleController::class);
         Route::get('role/export', ExportRoleController::class)->name('role.export');

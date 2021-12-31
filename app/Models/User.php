@@ -42,9 +42,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    //accesor for name column 
-    public function getNameAttribute($value)
+    public function getCreatedAtAttribute($value)
     {
-        return strtoupper($value);
+        return $value->format('d-m-Y H:i:s');
     }
 }
