@@ -17,6 +17,7 @@ class CreateMenuItemsTable extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('route')->unique();
+            $table->string('permission_name');
             $table->unsignedBigInteger('menu_group_id');
             $table->foreign('menu_group_id')->references('id')->on('menu_groups')->onDelete('cascade');
             $table->timestamps();

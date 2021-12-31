@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class MenuItem extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'route', 'menu_group_id'];
+    protected $fillable = ['name', 'route', 'menu_group_id', 'permission_name'];
 
     public function menuGroup()
     {

@@ -84,7 +84,8 @@
                                                 <td>{{ $menuItems->firstItem() + $key }}</td>
                                                 <td>{{ $menuItem->menu_group_name }}</td>
                                                 <td>{{ $menuItem->name }}</td>
-                                                <td>{{ $menuItem->url }}</td>
+                                                <td>{{ $menuItem->route }}</td>
+                                                <td>{{ $menuItem->permission_name }}</td>
                                                 <td class="text-right">
                                                     <div class="d-flex justify-content-end">
                                                         <a href="{{ route('menu-item.edit', $menuItem->id) }}"
@@ -94,7 +95,8 @@
                                                         <form action="{{ route('menu-item.destroy', $menuItem->id) }}"
                                                             method="POST" class="ml-2">
                                                             <input type="hidden" name="_method" value="DELETE">
-                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                            <input type="hidden" name="_token"
+                                                                value="{{ csrf_token() }}">
                                                             <button class="btn btn-sm btn-danger btn-icon "><i
                                                                     class="fas fa-times"></i> Delete </button>
                                                         </form>
