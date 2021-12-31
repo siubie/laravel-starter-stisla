@@ -11,6 +11,13 @@ use Spatie\Permission\Models\Role;
 
 class AssignUserToRoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:assign.user.index')->only('index');
+        $this->middleware('permission:assign.user.create')->only('create', 'store');
+        $this->middleware('permission:assign.user.edit')->only('edit', 'update');
+    }
     //
     public function index()
     {

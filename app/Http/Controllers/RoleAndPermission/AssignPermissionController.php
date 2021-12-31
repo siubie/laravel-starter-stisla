@@ -15,6 +15,15 @@ use Spatie\Permission\Models\Role;
 
 class AssignPermissionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:assign.index')->only('index');
+        $this->middleware('permission:assign.create')->only('create', 'store');
+        $this->middleware('permission:assign.edit')->only('edit', 'update');
+        $this->middleware('permission:assign.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *
