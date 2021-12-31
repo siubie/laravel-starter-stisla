@@ -29,7 +29,7 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'user.index']);
         Permission::create(['name' => 'user.create']);
         Permission::create(['name' => 'user.edit']);
-        Permission::create(['name' => 'user.delete']);
+        Permission::create(['name' => 'user.destroy']);
         Permission::create(['name' => 'user.import']);
         Permission::create(['name' => 'user.export']);
 
@@ -37,7 +37,7 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'role.index']);
         Permission::create(['name' => 'role.create']);
         Permission::create(['name' => 'role.edit']);
-        Permission::create(['name' => 'role.delete']);
+        Permission::create(['name' => 'role.destroy']);
         Permission::create(['name' => 'role.import']);
         Permission::create(['name' => 'role.export']);
 
@@ -45,7 +45,7 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'permission.index']);
         Permission::create(['name' => 'permission.create']);
         Permission::create(['name' => 'permission.edit']);
-        Permission::create(['name' => 'permission.delete']);
+        Permission::create(['name' => 'permission.destroy']);
         Permission::create(['name' => 'permission.import']);
         Permission::create(['name' => 'permission.export']);
 
@@ -53,7 +53,7 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'assign.index']);
         Permission::create(['name' => 'assign.create']);
         Permission::create(['name' => 'assign.edit']);
-        Permission::create(['name' => 'assign.delete']);
+        Permission::create(['name' => 'assign.destroy']);
 
         //assingusertorole
         Permission::create(['name' => 'assign.user.index']);

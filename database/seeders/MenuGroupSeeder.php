@@ -26,17 +26,17 @@ class MenuGroupSeeder extends Seeder
                 [
                     'name' => 'Users Management',
                     'icon' => 'fas fa-users',
-                    'permission_name' => 'user-management',
+                    'permission_name' => 'user.management',
                 ],
                 [
                     'name' => 'Role Management',
                     'icon' => 'fas fa-user-tag',
-                    'permisison_name' => 'role-and-permission',
+                    'permisison_name' => 'role.permission.management',
                 ],
                 [
                     'name' => 'Menu Management',
                     'icon' => 'fas fa-bars',
-                    'permisison_name' => 'menu-management',
+                    'permisison_name' => 'menu.management',
                 ]
             ]
         );

@@ -22,7 +22,7 @@ class UserController extends Controller
         $this->middleware('permission:user.index')->only('index');
         $this->middleware('permission:user.create')->only('create', 'store');
         $this->middleware('permission:user.edit')->only('edit', 'update');
-        $this->middleware('permission:user.delete')->only('delete');
+        $this->middleware('permission:user.destroy')->only('destroy');
     }
 
     /**
