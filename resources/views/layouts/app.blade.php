@@ -142,7 +142,8 @@
                 </ul>
             </nav>
             <div class="main-sidebar">
-                @include('layouts.sidebar')
+                <x-sidebar title="Test"/>
+                {{-- @include('layouts.sidebar') --}}
             </div>
 
             <!-- Main Content -->

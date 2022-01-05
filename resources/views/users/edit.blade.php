@@ -1,6 +1,4 @@
 @extends('layouts.app')
-<!-- {{ URL::asset('css/style.css') }} -->
-
 @section('content')
     <section class="section">
         <div class="section-header">

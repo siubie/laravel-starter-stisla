@@ -15,11 +15,11 @@
             <h2 class="section-title">Tambah User</h2>
 
             <div class="card">
-                <form action="{{ route('user.store') }}" method="post">
-                    <div class="card-header">
-                        <h4>Validasi Tambah Data</h4>
-                    </div>
-                    <div class="card-body">
+                <div class="card-header">
+                    <h4>Validasi Tambah Data</h4>
+                </div>
+                <div class="card-body">
+                    <form action="{{ route('user.store') }}" method="post">
                         @csrf
                         <div class="form-group">
                             <label for="name">Your Name</label>
@@ -51,11 +51,11 @@
                                 </div>
                             @enderror
                         </div>
-                    </div>
-                    <div class="card-footer text-right">
-                        <button class="btn btn-primary">Submit</button>
-                        <a class="btn btn-secondary" href="{{ route('user.index') }}">Cancel</a>
-                    </div>
+                </div>
+                <div class="card-footer text-right">
+                    <button class="btn btn-primary">Submit</button>
+                    <a class="btn btn-secondary" href="{{ route('user.index') }}">Cancel</a>
+                </div>
                 </form>
             </div>
         </div>

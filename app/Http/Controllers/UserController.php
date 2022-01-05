@@ -11,24 +11,36 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\UsersImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Yajra\DataTables\Facades\DataTables;
+
 
 class UserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:user.index')->only('index');
+        $this->middleware('permission:user.create')->only('create', 'store');
+        $this->middleware('permission:user.edit')->only('edit', 'update');
+        $this->middleware('permission:user.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //index -> menampilkan tabel data
         // mengambil data
-        $user = User::all();
-
-        // menampilkan data
-        return view('users.index')
-            ->with('users', $user);
+        $users = DB::table('users')
+            ->when($request->input('name'), function ($query, $name) {
+                return $query->where('name', 'like', '%' . $name . '%');
+            })
+            ->select('id', 'name', 'email', DB::raw("DATE_FORMAT(created_at, '%d %M %Y') as created_at"))
+            ->paginate(10);
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -108,9 +120,7 @@ class UserController extends Controller
     {
         //delete data
         $user->delete();
-        return response()->json([
-            'message' => 'Data penerbangan berhasil dihapus!'
-        ]);
+        return redirect()->route('user.index')->with('success', 'User Deleted Successfully');
     }
 
     public function export()
@@ -127,33 +137,9 @@ class UserController extends Controller
             User::where('id', $user[0])->update([
                 'name' => $user[1],
                 'email' => $user[2],
+                'password' => $user[3],
             ]);
         }
         return redirect()->route('user.index');
-    }
-
-    public function filter(Request $request)
-    {
-        // 1. ambil data user
-        $users = DB::table('users')
-            ->when($request->input('name'), function ($query, $data) {
-                return $query->where('name', 'like', '%' . $data . '%');
-            })
-            ->when($request->input('email'), function ($query, $data) {
-                return $query->where('email', 'like', '%' . $data . '%');
-            })
-            ->selectRaw("
-            id,
-            name,
-            email,
-            DATE_FORMAT(created_at,'%d-%m-%Y') as date
-            ")
-            ->get();
-
-        // 2. ubah data user berupa datatable
-        $datatable = DataTables::of($users)->make(true);
-
-        // 3. return datatable
-        return $datatable;
     }
 }
