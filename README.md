@@ -5,7 +5,7 @@
 2. Authentication via [Laravel Fortify](https://github.com/laravel/fortify)
 3. Role and Permission via [Spatie Laravel Permission](https://github.com/spatie/laravel-permission)
 4. Backup via [Spatie Laravel Backup](https://github.com/spatie/laravel-backup)
-4. Dynamic Menu based on Role
+5. Dynamic Menu based on Role
 
 ## Contributor
 1. [Putra Prima Arhandi](https://github.com/siubie)
