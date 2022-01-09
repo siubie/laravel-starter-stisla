@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Register &mdash; Stisla</title>
+    <title>{{ config('app.name') }} - Register</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -59,7 +59,8 @@
                                             <div class="form-group">
                                                 <label for="email">Email</label>
                                                 <input id="email" type="email" class="form-control" name="email"
-                                                    value="{{old('email')}}" class="form-control @error('email') is-invalid @enderror"
+                                                    value="{{ old('email') }}"
+                                                    class="form-control @error('email') is-invalid @enderror"
                                                     placeholder="Masukkan Alamat Email">
                                                 @error('email')
                                                     <div class="invalid-feedback">
