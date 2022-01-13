@@ -60,8 +60,8 @@
                                         @enderror
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary btn-block">SEND PASSWORD RESET
-                                        LINK</button>
+                                    <button type="submit" class="btn btn-primary btn-block">Send Password Reset
+                                        Link</button>
                                 </form>
                             </div>
                         </div>
