@@ -12,7 +12,7 @@
 2. Muhammad Afdal
 3. Dewi Okta
 4. Evina Dinda
-5. Ardhanika
+5. [Ardhanika](https://github.com/ardhanika)
 6. Jaya Mahendra
 
 ## License
