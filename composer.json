@@ -10,7 +10,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/fortify": "^1.8",
         "laravel/framework": "^8.54",
-        "laravel/sanctum": "^2.11",
+        "laravel/sanctum": "^2.14",
         "laravel/tinker": "^2.5",
         "maatwebsite/excel": "^3.1",
         "spatie/laravel-backup": "^6.16",
