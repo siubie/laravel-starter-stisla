@@ -6,6 +6,7 @@
 3. Role and Permission via [Spatie Laravel Permission](https://github.com/spatie/laravel-permission)
 4. Backup via [Spatie Laravel Backup](https://github.com/spatie/laravel-backup)
 5. Dynamic Menu based on Role
+6. Mobile Rest Api Auth via [Laravel Sanctum](https://github.com/laravel/sanctum)
 
 ## Contributor
 1. [Putra Prima Arhandi](https://github.com/siubie)
