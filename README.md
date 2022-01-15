@@ -8,6 +8,9 @@
 5. Dynamic Menu based on Role
 6. Mobile Rest Api Auth via [Laravel Sanctum](https://github.com/laravel/sanctum)
 
+## Screenshots
+Check [Screenshots](screenshots/screenshots.md)
+
 ## Contributor
 1. [Putra Prima Arhandi](https://github.com/siubie)
 2. Muhammad Afdal
