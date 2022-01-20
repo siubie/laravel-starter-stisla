@@ -47,7 +47,8 @@ class User extends Authenticatable
         return $value->format('d-m-Y H:i:s');
     }
 
-    public function surat(){
+    public function surats()
+    {
         return $this->hasMany(SuratAktifKuliah::class);
     }
 }
