@@ -90,7 +90,8 @@
                                                 <label for="password_confirmation" class="d-block">Password
                                                     Confirmation</label>
                                                 <input id="password_confirmation" name="password_confirmation"
-                                                    class="form-control" placeholder="Masukkan Konfirmasi Password">
+                                                    type="password" class="form-control"
+                                                    placeholder="Masukkan Konfirmasi Password">
                                                 @error('password')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
