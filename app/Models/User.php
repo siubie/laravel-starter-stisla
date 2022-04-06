@@ -46,4 +46,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $value->format('d-m-Y H:i:s');
     }
+
+    public function surats()
+    {
+        return $this->hasMany(SuratAktifKuliah::class);
+    }
 }
